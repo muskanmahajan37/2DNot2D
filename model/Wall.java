@@ -42,7 +42,7 @@ public class Wall {
     }
 
     public Color getColorAtDist(double dist) {
-        if (((int)dist*7) % 2 == 0) {
+        if (((int) dist * 7) % 2 == 0) {
             return color1;
         } else {
             return color2;

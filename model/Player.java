@@ -1,19 +1,29 @@
 package model;
 
 public class Player {
-    /** X position */
+    /**
+     * X position
+     */
     public double x;
 
-    /** Y position */
+    /**
+     * Y position
+     */
     public double y;
 
-    /** Angle the player is looking at */
+    /**
+     * Angle the player is looking at
+     */
     public double theta;
 
-    /** On this.update() move in this direction */
+    /**
+     * On this.update() move in this direction
+     */
     String nextMoveDirection;
 
-    /** On this.update() turn in the direction */
+    /**
+     * On this.update() turn in the direction
+     */
     double nextTurnValue;
 
     public Player(double x, double y, double theta) {
@@ -23,7 +33,7 @@ public class Player {
     }
 
     public ViewLine viewLine(double angle) {
-        return new ViewLine (x, y, theta + angle);
+        return new ViewLine(x, y, theta + angle);
     }
 
     public void update(float deltaTime) {
@@ -36,16 +46,13 @@ public class Player {
         if (nextMoveDirection.equals("W")) {
             this.x += 3 * deltaTime * Math.cos(theta);
             this.y += 3 * deltaTime * Math.sin(theta);
-        }
-        else if (nextMoveDirection.equals("S")) {
+        } else if (nextMoveDirection.equals("S")) {
             this.x += 3 * deltaTime * Math.cos(theta + Math.PI);
             this.y += 3 * deltaTime * Math.sin(theta + Math.PI);
-        }
-        else if (nextMoveDirection.equals("D")) {
+        } else if (nextMoveDirection.equals("D")) {
             this.x += 3 * deltaTime * Math.cos(theta + 3 * Math.PI / 2);
             this.y += 3 * deltaTime * Math.sin(theta + 3 * Math.PI / 2);
-        }
-        else if (nextMoveDirection.equals("A")) {
+        } else if (nextMoveDirection.equals("A")) {
             this.x += 3 * deltaTime * Math.cos(theta + Math.PI / 2);
             this.y += 3 * deltaTime * Math.sin(theta + Math.PI / 2);
         }

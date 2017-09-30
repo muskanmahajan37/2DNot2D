@@ -16,7 +16,7 @@ public class Level {
     public double exitRadius;
 
     public Level scale(double scale) {
-        for (Wall w: walls) {
+        for (Wall w : walls) {
             w.x = w.x * scale;
             w.y = w.y * scale;
             w.length = w.length * scale;
