@@ -15,12 +15,12 @@ public class GameView {
     public Canvas canvas;
     public boolean win = false;
     public Level level;
+    public int deaths;
 
 
     private Player player;
     private Stage primaryStage;
     private boolean ignoreMouseEvent = false;
-    private int deaths;
     private Runnable onQuitFunc = null;
 
     GameView(Stage primaryStage) {
@@ -83,6 +83,7 @@ public class GameView {
                     player.updatePosition("D");
                     break;
                 case Q:
+                    loop.stop();
                     onQuitFunc.run();
                     break;
                 case R:

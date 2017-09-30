@@ -1,6 +1,7 @@
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -10,6 +11,7 @@ import model.Wall;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class MenuView extends Application {
 
@@ -23,13 +25,23 @@ public class MenuView extends Application {
 
 
         primaryStage.setResizable(false);
-        primaryStage.setTitle("Hello World!");
+        primaryStage.setTitle("2DNot2D?");
 
         StackPane root = new StackPane();
 
         ScrollPane scrollPane = new ScrollPane();
         VBox scrollPaneChild = new VBox();
         scrollPane.setContent(scrollPaneChild);
+
+        Label info = new Label("1st person 2D game\n\n" +
+                "wasd + moust to move\n" +
+                "Press 'q' to exit a level.\n" +
+                "You die if you touch any wall.\n" +
+                "You win by getting to the end (the green wall)\n" +
+                "Good luck!\n\n" +
+                "You have died 0 times so far.\n ");
+
+        scrollPaneChild.getChildren().add(info);
 
         GameView game = new GameView(primaryStage);
 
@@ -51,6 +63,7 @@ public class MenuView extends Application {
             scrollPaneChild.getChildren().add(btn);
         }
 
+        AtomicInteger totalDeaths = new AtomicInteger();
         game.onQuit(() -> {
             root.getChildren().remove(game.canvas);
             root.getChildren().add(scrollPane);
@@ -58,6 +71,15 @@ public class MenuView extends Application {
                 int index = levels.indexOf(game.level);
                 buttons.get(index).setStyle("-fx-background-color: moccasin");
             }
+
+            totalDeaths.addAndGet(game.deaths);
+            String times;
+            if (totalDeaths.get() == 1)
+                times = "time";
+            else
+                times = "times";
+            info.setText(info.getText().replaceFirst("You have died (\\d*) times? so far",
+                    "You have died " + totalDeaths.get() + " " + times + " so far"));
         });
 
         root.getChildren().add(scrollPane);
