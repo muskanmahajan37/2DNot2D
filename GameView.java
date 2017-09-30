@@ -4,7 +4,6 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -81,19 +80,15 @@ public class GameView extends Application {
                 switch (event.getCode()) {
                     case W:
                         player.updatePosition("W");
-                        draw();
                         break;
                     case S:
                         player.updatePosition("S");
-                        draw();
                         break;
                     case A:
                         player.updatePosition("A");
-                        draw();
                         break;
                     case D:
                         player.updatePosition("D");
-                        draw();
                         break;
                 }
             }
@@ -110,10 +105,8 @@ public class GameView extends Application {
 
                 double mouseDeltaX = 0;
                 mouseDeltaX += Math.round(event.getScreenX() - (primaryStage.getX() + (primaryStage.getWidth() / 2.0)));
-                double newTheta = mouseDeltaX;
+                double newTheta = mouseDeltaX ;
                 player.updateTheta(newTheta);
-                draw();
-                System.out.println(mouseDeltaX);
 
                 ignoreMouseEvent = true;
                 try {
@@ -172,15 +165,15 @@ public class GameView extends Application {
     }
 
     private void draw() {
-        for (int i = 0; i < 101; i++) {
-            Color c = colorAtViewLine(myWalls, player.viewLine((i - 50) * Math.PI / 400));
+        for (int i = 0; i < 201; i++) {
+            Color c = colorAtViewLine(myWalls, player.viewLine((i - 100) * Math.PI / 400));
 
             if (c != null) {
                 canvas.getGraphicsContext2D().setFill(c);
             } else {
                 canvas.getGraphicsContext2D().setFill(Color.BLACK);
             }
-            canvas.getGraphicsContext2D().fillRect(i * 3, 40, 3, 20);
+            canvas.getGraphicsContext2D().fillRect(i*2 , 40, 2, 20);
 
 //            System.out.println("Drawing at: "+ i + "\n\n");
 
