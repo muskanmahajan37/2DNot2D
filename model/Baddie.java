@@ -5,6 +5,8 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.scene.paint.Color;
+
 /**
  * Created by arthurbacon on 9/30/17.
  */
@@ -38,6 +40,9 @@ public class Baddie {
 
      patroling = false;
      timesCalled = 0;
+
+     wallHoriz.color1 = Color.WHITE;
+     wallVert.color1 = Color.WHITE;
    }
 
   public void scaleBaddie(double scaleBy) {
@@ -52,6 +57,16 @@ public class Baddie {
                         wallVert.y * scaleBy,
                         wallVert.theta,
                         wallVert.length * scaleBy);
+  }
+
+
+  void updateWalls() {
+    double wallLength = 1 * size;
+    wallVert.x = positionX - (wallLength / 2);
+    wallVert.y = positionY;
+
+    wallHoriz.x = positionX;
+    wallHoriz.y = positionY + (wallLength / 2);
   }
 
   public void setPatrol(List<Point2D> points, double speed) {
@@ -122,6 +137,7 @@ public class Baddie {
     // modify the current x,y by the currentStandardizedVector
     this.positionX += currentStandardizedVector.getX();
     this.positionY += currentStandardizedVector.getY();
+    updateWalls();
   }
 
   public void updateBaddie() {

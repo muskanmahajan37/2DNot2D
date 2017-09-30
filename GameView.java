@@ -49,7 +49,7 @@ public class GameView {
 
                 if (!win) {
                     player.update(deltaTime);
-                    //level.updateBaddies();
+                    level.updateBaddies();
                 }
 
 

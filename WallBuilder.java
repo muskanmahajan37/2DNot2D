@@ -54,7 +54,7 @@ public class WallBuilder {
             // If we are working on a wall
             // End and add it
             double dist = Math.abs(startPoint.y - rowNumber);
-            result.add(new Wall(startPoint.x, startPoint.y, Math.PI * 3 / 2, dist));
+            result.add(new Wall(startPoint.x, startPoint.y, Math.PI * 3 / 2, dist - 1));
             workingOnWall = false;
           } else {
             // If we are NOT working on a wall
@@ -101,7 +101,7 @@ public class WallBuilder {
             // If we are working on a wall
             // finish it!
             double dist = Math.abs(startPoint.y - rowNumber);
-            result.add(new Wall(startPoint.x, startPoint.y, Math.PI * 3 / 2, dist));
+            result.add(new Wall(startPoint.x, startPoint.y, Math.PI * 3 / 2, dist - 1));
             workingOnWall = false;
           } else {
             // If we are not working on a wall
@@ -113,7 +113,7 @@ public class WallBuilder {
       if (workingOnWall) {
         // end the wall
         double dist = Math.abs(startPoint.y - askiiInBools.size());
-        result.add(new Wall(startPoint.x, startPoint.y, Math.PI * 3 / 2, dist));
+        result.add(new Wall(startPoint.x, startPoint.y, Math.PI * 3 / 2, dist - 1));
         workingOnWall = false;
       }
     } // End row
@@ -173,7 +173,7 @@ public class WallBuilder {
             // We are currently working on a wall
             // Build that wall!
             double dist = Math.abs(startPoint.x - columnNumber);
-            result.add(new Wall(startPoint.x, startPoint.y, 0, dist));
+            result.add(new Wall(startPoint.x, startPoint.y, 0, dist - 1));
             workingOnWall = false;
           } else {
             // We are not currently working on a wall
@@ -187,7 +187,7 @@ public class WallBuilder {
         // If we ended the row and we're still working on a wall
         // build it
         double dist = Math.abs(startPoint.x - askiiInBools.get(rowNumber).size());
-        result.add(new Wall(startPoint.x, startPoint.y, 0, dist));
+        result.add(new Wall(startPoint.x, startPoint.y, 0, dist - 1));
         workingOnWall = false;
       }
     } // End for loop (row number
