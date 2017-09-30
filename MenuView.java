@@ -13,6 +13,7 @@ import model.Wall;
 
 import java.awt.geom.Point2D;
 import java.io.FileNotFoundException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -121,12 +122,16 @@ public class MenuView extends Application {
         List<Level> LoL = new ArrayList<Level>();
 
         try {
-            List<Wall> LoW1 = wb.wallsFromFile("C:\\Users\\Jason\\IdeaProjects\\2DNot2D\\src\\hmap.txt");
+            URL urlh = getClass().getResource("hmap.txt");
+
+            System.out.println(urlh.getPath());
+            List<Wall> LoW1 = wb.wallsFromFile(urlh.getPath());
             Wall exith = new Wall(15, 0, Math.PI / 4, 3 * Math.sqrt(2));
             Level hmap = new Level(LoW1, 1, 7, 0, 16, 1, 2, "H");
             LoL.add(hmap);
 
-            List<Wall> LoW2 = wb.wallsFromFile("C:\\Users\\Jason\\IdeaProjects\\2DNot2D\\src\\gmap.txt");
+            URL urlg = getClass().getResource("gmap.txt");
+            List<Wall> LoW2 = wb.wallsFromFile(urlg.getPath());
             Wall exitg = new Wall(11, 5, 0, 1);
             Level gmap = new Level(LoW2, 13, 8, Math.PI / 2, 11, 5, 2, "G");
             LoL.add(gmap);
