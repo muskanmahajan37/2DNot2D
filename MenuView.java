@@ -7,9 +7,11 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import model.Baddie;
 import model.Level;
 import model.Wall;
 
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -72,6 +74,17 @@ public class MenuView extends Application {
         l.exitY = 0;
         l.exitRadius = 1;
         levels.add(l);
+
+        Baddie baddie = new Baddie(7, 0, 1);
+        List<Point2D> points = new ArrayList<>(3);
+        points.add(new Point2D.Double(7, 0));
+        points.add(new Point2D.Double(7, 4));
+        points.add(new Point2D.Double(3, 2));
+        baddie.setPatrol(points, 1);
+
+        l.addBaddie(baddie);
+
+
 
         return levels;
     }

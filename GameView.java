@@ -45,8 +45,11 @@ public class GameView {
                 double beforeY = player.y;
                 double beforeTheta = player.theta;
 
-                if (!win)
+                if (!win) {
                     player.update(deltaTime);
+                    level.updateBaddies();
+                }
+
 
                 if (Math.abs(player.x - level.exitX) + Math.abs(player.y - level.exitY) < level.exitRadius) {
                     win = true;

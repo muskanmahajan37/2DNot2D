@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Level {
     public List<Wall> walls = new ArrayList<>();
+    public List<Baddie> baddies = new ArrayList<>();
 
     public double playerstartx;
     public double playerstarty;
@@ -14,6 +15,8 @@ public class Level {
     public double exitX;
     public double exitY;
     public double exitRadius;
+
+    public Baddie baddie;
 
     public Level scale(double scale) {
         for (Wall w: walls) {
@@ -27,5 +30,17 @@ public class Level {
         exitY = exitY * scale;
         exitRadius = exitRadius * scale;
         return this;
+    }
+
+    public void addBaddie(Baddie toAdd) {
+        baddies.add(toAdd);
+        walls.add(toAdd.wallVert);
+        walls.add(toAdd.wallHoriz);
+    }
+
+    public void updateBaddies() {
+        for (Baddie b : baddies) {
+            b.updateBaddie();
+        }
     }
 }
