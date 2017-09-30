@@ -76,7 +76,21 @@ public class GameView extends Application {
 
         Pane root = new Pane(canvas);
         primaryStage.setScene(new Scene(root));
-        primaryStage.getScene().setCursor(Cursor.NONE);
+        primaryStage.getScene().setOnMouseEntered(new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent event) {
+                primaryStage.getScene().setCursor(Cursor.NONE);
+            }
+        });
+        primaryStage.getScene().setOnMouseExited(new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent event) {
+                primaryStage.getScene().setCursor(Cursor.DEFAULT);
+            }
+        });
+
         primaryStage.getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
@@ -101,14 +115,14 @@ public class GameView extends Application {
             @Override
             public void handle(MouseEvent event) {
                 //System.out.println(event.getSceneX() + "   " + event.getX() + "   " + event.getScreenX());
-                if(ignoreMouseEvent) {
+                if (ignoreMouseEvent) {
                     ignoreMouseEvent = false;
                     return;
                 }
 
                 double mouseDeltaX = 0;
                 mouseDeltaX += Math.round(event.getScreenX() - (primaryStage.getX() + (primaryStage.getWidth() / 2.0)));
-                double newTheta = mouseDeltaX/200*(Math.PI/2);
+                double newTheta = mouseDeltaX / 200 * (Math.PI / 2);
                 player.updateTheta(newTheta);
                 System.out.println(newTheta);
 
@@ -117,8 +131,7 @@ public class GameView extends Application {
                     Robot robot = new Robot();
                     robot.mouseMove((int) (primaryStage.getX() + (primaryStage.getWidth() / 2.0)),
                             (int) (primaryStage.getY() + (primaryStage.getHeight() / 2.0)));
-                }
-                catch (AWTException e) {
+                } catch (AWTException e) {
                     e.printStackTrace();
                 }
             }
