@@ -55,6 +55,10 @@ public class GameView extends Application {
         Wall wall5 = new Wall(0, 0, 0, 20);
         wall5.color2 = Color.PURPLE;
 
+        Wall exit = new Wall(45, 40, 1, 5 * Math.sqrt(2));
+        exit.color1 = Color.DEEPSKYBLUE;
+        exit.color2 = Color.DEEPSKYBLUE;
+
         myWalls = new ArrayList<>();
         myWalls.add(wall0);
         myWalls.add(wall1);
@@ -62,6 +66,7 @@ public class GameView extends Application {
         myWalls.add(wall3);
         myWalls.add(wall4);
         myWalls.add(wall5);
+        myWalls.add(exit);
 
 
         AnimationTimer loop = new AnimationTimer() {
