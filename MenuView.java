@@ -48,7 +48,7 @@ public class MenuView extends Application {
         Button btn = new Button();
         btn.setText("Level One");
         btn.setOnAction(event -> {
-            game.createCanvas(levels().get(0));
+            game.createCanvas(initLevels().get(0));
             root.getChildren().remove(scrollPane);
             root.getChildren().add(game.canvas);
             game.canvas.requestFocus();
@@ -79,12 +79,12 @@ public class MenuView extends Application {
         List<Level> LoL = new ArrayList<Level>();
 
         try {
-            List<Wall> LoW1 = wb.wallsFromFile("hmap.txt");
+            List<Wall> LoW1 = wb.wallsFromFile("C:\\Users\\Jason\\IdeaProjects\\2DNot2D\\src\\hmap.txt");
             Wall exith = new Wall(15, 0, Math.PI / 4, 3 * Math.sqrt(2));
             Level hmap = new Level(LoW1,  1, 7, 0, 16, 1, 2, "H");
             LoL.add(hmap);
-
-            List<Wall> LoW2 = wb.wallsFromFile("gmap.txt");
+            
+            List<Wall> LoW2 = wb.wallsFromFile("C:\\Users\\Jason\\IdeaProjects\\2DNot2D\\src\\gmap.txt");
             Wall exitg = new Wall(11, 5, 0, 1);
             Level gmap = new Level(LoW2,  13, 8, Math.PI / 2, 11, 5, 2, "G");
             LoL.add(gmap);
