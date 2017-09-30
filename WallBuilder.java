@@ -1,19 +1,8 @@
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
 import java.awt.geom.Point2D;
-import java.lang.reflect.Array;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.io.*;
 import java.util.Scanner;
-import java.awt.geom.Point2D.Double;
-import java.util.stream.Stream;
-
-
-import javafx.geometry.Pos;
 import model.Wall;
 
 /**
