@@ -35,10 +35,6 @@ public class GameView extends Application {
 
         canvas = new Canvas(600, 200);
 
-        GraphicsContext g = canvas.getGraphicsContext2D();
-        g.fillRect(10, 10, 10, 40);
-
-
         player = new Player(2, 4, 0); //Math.PI * 1 / 5);
 
         Wall wall0 = new Wall(0, 0, 0, 11);
@@ -183,12 +179,14 @@ public class GameView extends Application {
         for (int i = 0; i < 201; i++) {
             Color c = colorAtViewLine(myWalls, player.viewLine((i - 100) * Math.PI / 400));
 
+            GraphicsContext g = canvas.getGraphicsContext2D();
+
             if (c != null) {
-                canvas.getGraphicsContext2D().setFill(c);
+                g.setFill(c);
             } else {
-                canvas.getGraphicsContext2D().setFill(Color.BLACK);
+                g.setFill(Color.BLACK);
             }
-            canvas.getGraphicsContext2D().fillRect(i*2 , 40, 2, 20);
+            g.fillRect(i*2 , 40, 2, 20);
 
 //            System.out.println("Drawing at: "+ i + "\n\n");
 

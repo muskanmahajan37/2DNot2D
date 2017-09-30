@@ -5,11 +5,6 @@ import javafx.scene.paint.Color;
 public class Wall {
 
     /**
-     * how wide each color thing on the wall is
-     */
-    public static double colorBeamWidth = 1;
-
-    /**
      * X position of start
      */
     public double x;
@@ -37,7 +32,7 @@ public class Wall {
     }
 
     public Color getColorAtDist(double dist) {
-        if (((int)dist) % 2 == 0) {
+        if (((int)dist*7) % 2 == 0) {
             return Color.BLUEVIOLET;
         } else {
             return Color.CRIMSON;
