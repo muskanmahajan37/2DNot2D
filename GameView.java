@@ -40,19 +40,19 @@ public class GameView extends Application {
         Wall wall0 = new Wall(0, 0, Math.PI/2, 60);
         wall0.color2 = Color.DARKKHAKI;
 
-        Wall wall1 = new Wall(0, 60, Math.PI, 50);
+        Wall wall1 = new Wall(0, 60, 0, 50);
         wall1.color2 = Color.MEDIUMAQUAMARINE;
 
-        Wall wall2 = new Wall(50, 60, Math.PI/2, 20);
+        Wall wall2 = new Wall(50, 60, 3*Math.PI/2, 20);
         wall2.color2 = Color.NAVY;
 
-        Wall wall3 = new Wall(20, 40, Math.PI, 30);
+        Wall wall3 = new Wall(20, 40, 0, 30);
         wall3.color2 = Color.LIGHTSKYBLUE;
 
         Wall wall4 = new Wall(20, 0, Math.PI/2, 40);
         wall4.color2 = Color.BISQUE;
 
-        Wall wall5 = new Wall(0, 0, Math.PI, 20);
+        Wall wall5 = new Wall(0, 0, 0, 20);
         wall5.color2 = Color.CYAN;
 
         myWalls = new ArrayList<>();
