@@ -12,12 +12,20 @@ import model.Player;
 import model.ViewLine;
 import model.Wall;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameView extends Application {
     public static void main(String[] args) {
-        launch(args);
+
+        WallBuilder wb = new WallBuilder();
+        try {
+            wb.wallsFromFile("testWalls.txt");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        //launch(args);
     }
 
     @Override
