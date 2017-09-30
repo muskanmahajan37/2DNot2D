@@ -50,7 +50,7 @@ public class MenuView extends Application {
         GameView game = new GameView(primaryStage);
 
         List<Button> buttons = new ArrayList<>();
-        List<Level> levels = levels();
+        List<Level> levels = levels(); // initLevels();
 
         int levelNum = 0;
         for (Level l : levels) {
