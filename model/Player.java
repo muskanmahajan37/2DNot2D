@@ -34,4 +34,8 @@ public class Player {
             this.x += 1;
         }
     }
+
+    public void updateTheta(double newTheta) {
+        this.theta = newTheta;
+    }
 }
