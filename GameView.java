@@ -71,19 +71,37 @@ public class GameView {
         canvas.setOnMouseEntered(event -> canvas.setCursor(Cursor.NONE));
         canvas.setOnMouseExited(event -> canvas.setCursor(Cursor.DEFAULT));
 
+
+        canvas.setOnKeyReleased(event -> {
+            switch (event.getCode()) {
+                case W:
+                    player.up = false;
+                    break;
+                case S:
+                    player.down = false;
+                    break;
+                case A:
+                    player.left = false;
+                    break;
+                case D:
+                    player.right = false;
+                    break;
+            }
+
+        });
         canvas.setOnKeyPressed(event -> {
             switch (event.getCode()) {
                 case W:
-                    player.updatePosition("W");
+                    player.up = true;
                     break;
                 case S:
-                    player.updatePosition("S");
+                    player.down = true;
                     break;
                 case A:
-                    player.updatePosition("A");
+                    player.left = true;
                     break;
                 case D:
-                    player.updatePosition("D");
+                    player.right = true;
                     break;
                 case Q:
                     loop.stop();

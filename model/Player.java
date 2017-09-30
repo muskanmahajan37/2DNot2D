@@ -16,10 +16,10 @@ public class Player {
      */
     public double theta;
 
-    /**
-     * On this.update() move in this direction
-     */
-    String nextMoveDirection;
+    public boolean left;
+    public boolean right;
+    public boolean up;
+    public boolean down;
 
     /**
      * On this.update() turn in the direction
@@ -40,28 +40,25 @@ public class Player {
         this.theta += nextTurnValue * deltaTime;
         nextTurnValue = 0;
 
-        if (nextMoveDirection == null)
-            return;
-
-        if (nextMoveDirection.equals("W")) {
+        if (up) {
             this.x += 3 * deltaTime * Math.cos(theta);
             this.y += 3 * deltaTime * Math.sin(theta);
-        } else if (nextMoveDirection.equals("S")) {
+        }
+
+        if (down) {
             this.x += 3 * deltaTime * Math.cos(theta + Math.PI);
             this.y += 3 * deltaTime * Math.sin(theta + Math.PI);
-        } else if (nextMoveDirection.equals("D")) {
+        }
+
+        if (right) {
             this.x += 3 * deltaTime * Math.cos(theta + 3 * Math.PI / 2);
             this.y += 3 * deltaTime * Math.sin(theta + 3 * Math.PI / 2);
-        } else if (nextMoveDirection.equals("A")) {
+        }
+
+        if (left) {
             this.x += 3 * deltaTime * Math.cos(theta + Math.PI / 2);
             this.y += 3 * deltaTime * Math.sin(theta + Math.PI / 2);
         }
-
-        nextMoveDirection = null;
-    }
-
-    public void updatePosition(String direction) {
-        nextMoveDirection = direction;
     }
 
     public void updateTheta(double newTheta) {
