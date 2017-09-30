@@ -29,6 +29,8 @@ public class GameView {
     }
 
     public void createCanvas(Level level) {
+        win = false;
+
         this.level = level;
         this.player = new Player(level.playerstartx, level.playerstarty, level.playerstarttheta);
         AnimationTimer loop = new AnimationTimer() {
