@@ -22,6 +22,7 @@ public class GameView {
     private Stage primaryStage;
     private boolean ignoreMouseEvent = false;
     private Runnable onQuitFunc = null;
+    private boolean redrawScreen;
 
     GameView(Stage primaryStage) {
         this.primaryStage = primaryStage;
@@ -33,6 +34,7 @@ public class GameView {
 
         this.level = level;
         this.player = new Player(level.playerstartx, level.playerstarty, level.playerstarttheta);
+        redrawScreen = true;
         AnimationTimer loop = new AnimationTimer() {
             private long before = System.currentTimeMillis();
             private float deltaTime;
@@ -55,15 +57,13 @@ public class GameView {
                     win = true;
                 }
 
-                if (beforeX != player.x || beforeY != player.y || beforeTheta != player.theta)
+                if (redrawScreen ||
+                        beforeX != player.x || beforeY != player.y || beforeTheta != player.theta) {
                     draw();
+                    redrawScreen = false;
+                }
 
                 before = before + (long) (deltaTime * 1000);
-                try {
-                    Thread.sleep(20);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
             }
         };
 
@@ -109,6 +109,7 @@ public class GameView {
                     break;
                 case R:
                     player = new Player(level.playerstartx, level.playerstarty, level.playerstarttheta);
+                    redrawScreen = true;
                     break;
             }
         });
@@ -166,6 +167,7 @@ public class GameView {
             if (viewDist <= 0.1) {
                 deaths += 1;
                 player = new Player(level.playerstartx, level.playerstarty, level.playerstarttheta);
+                redrawScreen = true;
             }
 
 
