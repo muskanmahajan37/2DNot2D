@@ -26,6 +26,7 @@ public class GameView extends Application {
     private int startX;
     private int startY;
     private int startT;
+    private int deaths;
     private List<Wall> myWalls;
     public boolean ignoreMouseEvent = false;
 
@@ -49,6 +50,7 @@ public class GameView extends Application {
         startX = 2;
         startY = 4;
         startT = 0;
+        deaths = -1;
 
         Wall wall0 = new Wall(0, 0, Math.PI/2, 60);
         wall0.color2 = Color.BLUE;
@@ -205,8 +207,12 @@ public class GameView extends Application {
             if (wallDist > w.length)
                 continue;
 
-            if (viewDist <= 0.1)
+            if (viewDist <= 0.1) {
+                deaths += 1;
                 player = new Player(2, 4, 0);
+
+            }
+
 
             if (viewDist < currentClosestDist) {
                 nearestWall = w;
@@ -243,6 +249,10 @@ public class GameView extends Application {
 
 
         }
+
+        g.setFill(Color.DARKRED);
+        g.setFont(new Font("Roman", 16));
+        g.fillText("DEATHS: " + deaths, 50, 100);
 
         if (win) {
             g.setFill(Color.WHITE);
