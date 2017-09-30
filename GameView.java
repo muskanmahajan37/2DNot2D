@@ -14,22 +14,22 @@ import java.util.List;
 public class GameView {
     public Canvas canvas;
     public boolean win = false;
+    public Level level;
+    public int deaths;
 
 
     private Player player;
     private Stage primaryStage;
     private boolean ignoreMouseEvent = false;
-    private Level level;
-    private int deaths;
-    private long timeOfWin = 0;
     private Runnable onQuitFunc = null;
 
-    public GameView(Stage primaryStage) {
+    GameView(Stage primaryStage) {
         this.primaryStage = primaryStage;
     }
 
     public void createCanvas(Level level) {
         win = false;
+        this.level = level;
 
         this.level = level;
         this.player = new Player(level.playerstartx, level.playerstarty, level.playerstarttheta);
@@ -45,12 +45,14 @@ public class GameView {
                 double beforeY = player.y;
                 double beforeTheta = player.theta;
 
-                if (!win)
+                if (!win) {
                     player.update(deltaTime);
+                    //level.updateBaddies();
+                }
+
 
                 if (Math.abs(player.x - level.exitX) + Math.abs(player.y - level.exitY) < level.exitRadius) {
                     win = true;
-                    timeOfWin = System.currentTimeMillis();
                 }
 
                 if (beforeX != player.x || beforeY != player.y || beforeTheta != player.theta)
@@ -84,6 +86,7 @@ public class GameView {
                     player.updatePosition("D");
                     break;
                 case Q:
+                    loop.stop();
                     onQuitFunc.run();
                     break;
                 case R:
@@ -117,7 +120,7 @@ public class GameView {
         loop.start();
     }
 
-    public Color colorAtViewLine(List<Wall> walls, ViewLine viewLine) {
+    private Color colorAtViewLine(List<Wall> walls, ViewLine viewLine) {
 
         Wall nearestWall = null;
         double distAlongWall = Double.POSITIVE_INFINITY;
@@ -142,11 +145,10 @@ public class GameView {
             if (wallDist > w.length)
                 continue;
 
-            if (viewDist <= 0.1){
+            if (viewDist <= 0.1) {
                 deaths += 1;
-            player = new Player(level.playerstartx, level.playerstarty, level.playerstarttheta);
-        }
-
+                player = new Player(level.playerstartx, level.playerstarty, level.playerstarttheta);
+            }
 
 
             if (viewDist < currentClosestDist) {

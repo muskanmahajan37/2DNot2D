@@ -6,6 +6,7 @@ import java.util.List;
 public class Level {
 
     public List<Wall> walls = new ArrayList<>();
+    public List<Baddie> baddies = new ArrayList<>();
 
     public String name;
     public double playerstartx;
@@ -17,6 +18,7 @@ public class Level {
     public double exitY;
     public double exitRadius;
 
+    public Baddie baddie;
 
     public Level (List<Wall> walls, double playerstartX, double playerstarty, double playerstarttheta, double exitX,
                   double exitY, double exitRadius, String name) {
@@ -32,7 +34,7 @@ public class Level {
 
 
     public Level scale(double scale) {
-        for (Wall w: walls) {
+        for (Wall w : walls) {
             w.x = w.x * scale;
             w.y = w.y * scale;
             w.length = w.length * scale;
@@ -45,5 +47,15 @@ public class Level {
         return this;
     }
 
+    public void addBaddie(Baddie toAdd) {
+        baddies.add(toAdd);
+        walls.add(toAdd.wallVert);
+        walls.add(toAdd.wallHoriz);
+    }
 
+    public void updateBaddies() {
+        for (Baddie b : baddies) {
+            b.updateBaddie();
+        }
+    }
 }
