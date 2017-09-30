@@ -11,7 +11,21 @@ public class Level {
     public double playerstarttheta;
 
 
-    public double exitX = 50;
-    public double exitY = 40;
-    public double exitRadius = 10;
+    public double exitX;
+    public double exitY;
+    public double exitRadius;
+
+    public Level scale(double scale) {
+        for (Wall w: walls) {
+            w.x = w.x * scale;
+            w.y = w.y * scale;
+            w.length = w.length * scale;
+        }
+        playerstartx = playerstartx * scale;
+        playerstarty = playerstarty * scale;
+        exitX = exitX * scale;
+        exitY = exitY * scale;
+        exitRadius = exitRadius * scale;
+        return this;
+    }
 }
