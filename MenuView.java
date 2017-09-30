@@ -1,9 +1,7 @@
 import javafx.application.Application;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -11,7 +9,6 @@ import model.Level;
 import model.Wall;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class MenuView extends Application {
@@ -35,31 +32,41 @@ public class MenuView extends Application {
         scrollPane.setContent(scrollPaneChild);
 
         GameView game = new GameView(primaryStage);
+
+        List<Button> buttons = new ArrayList<>();
+        List<Level> levels = levels();
+
+        int levelNum = 0;
+        for (Level l : levels) {
+            Button btn = new Button();
+            levelNum++;
+            btn.setText("Level #" + levelNum + " -  " + l);
+            btn.setOnAction(event -> {
+                game.createCanvas(l);
+                root.getChildren().remove(scrollPane);
+                root.getChildren().add(game.canvas);
+                game.canvas.requestFocus();
+            });
+            buttons.add(btn);
+            scrollPaneChild.getChildren().add(btn);
+        }
+
         game.onQuit(() -> {
             root.getChildren().remove(game.canvas);
             root.getChildren().add(scrollPane);
             if (game.win) {
-
+                int index = levels.indexOf(game.level);
+                buttons.get(index).setStyle("-fx-background-color: moccasin");
             }
         });
 
-        Button btn = new Button();
-        btn.setText("Level One");
-        btn.setOnAction(event -> {
-            game.createCanvas(levels().get(0));
-            root.getChildren().remove(scrollPane);
-            root.getChildren().add(game.canvas);
-            game.canvas.requestFocus();
-
-        });
-        scrollPaneChild.getChildren().add(btn);
         root.getChildren().add(scrollPane);
         primaryStage.setScene(new Scene(root, 600, 200));
         primaryStage.show();
     }
 
 
-    public List<Level> levels() {
+    private List<Level> levels() {
 
         List<Level> levels = new ArrayList<>();
 
