@@ -105,7 +105,7 @@ public class GameView extends Application {
 
                 double mouseDeltaX = 0;
                 mouseDeltaX += Math.round(event.getScreenX() - (primaryStage.getX() + (primaryStage.getWidth() / 2.0)));
-                double newTheta = mouseDeltaX ;
+                double newTheta = mouseDeltaX / 70;
                 player.updateTheta(newTheta);
 
                 ignoreMouseEvent = true;

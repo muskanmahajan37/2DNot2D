@@ -27,6 +27,10 @@ public class Player {
     }
 
     public void update(float deltaTime) {
+        this.theta += nextTurnValue * deltaTime;
+        System.out.println(nextTurnValue * deltaTime);
+        nextTurnValue = 0;
+
         if (nextMoveDirection == null)
             return;
 
@@ -48,10 +52,6 @@ public class Player {
         }
 
         nextMoveDirection = null;
-
-        this.theta += nextTurnValue * deltaTime;
-        System.out.println(nextTurnValue * deltaTime);
-        nextTurnValue = 0;
     }
 
     public void updatePosition(String direction) {
