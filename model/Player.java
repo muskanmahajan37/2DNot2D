@@ -2,13 +2,13 @@ package model;
 
 public class Player {
     /** X position */
-    double x;
+    public double x;
 
     /** Y position */
-    double y;
+    public double y;
 
     /** Angle the player is looking at */
-    double theta;
+    public double theta;
 
     /** On this.update() move in this direction */
     String nextMoveDirection;

@@ -64,12 +64,18 @@ public class GameView extends Application {
             public void handle(long l) {
                 deltaTime = (System.currentTimeMillis() - before) / 1000F;
 
+                double tmpx = player.x;
+                double tmpy = player.y;
+                double tmpA = player.theta;
+
                 player.update(deltaTime);
-                draw();
+
+                if (tmpx != player.x || tmpy != player.y || tmpA != player.theta)
+                    draw();
 
                 before = before + (long) (deltaTime * 1000);
                 try {
-                    Thread.sleep(20);
+                    Thread.sleep(30);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -140,6 +146,7 @@ public class GameView extends Application {
 
         primaryStage.show();
 
+        draw();
         loop.start();
     }
 
