@@ -4,6 +4,7 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -16,6 +17,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameView extends Application {
+    private Canvas canvas;
+    private Player player;
+    private List<Wall> myWalls;
+    private String mousePosition;
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -24,27 +30,20 @@ public class GameView extends Application {
     public void start(Stage primaryStage) {
         primaryStage.setTitle("2DNot2D");
 
-        Canvas canvas = new Canvas(600, 200);
+        canvas = new Canvas(600, 200);
 
         GraphicsContext g = canvas.getGraphicsContext2D();
         g.fillRect(10, 10, 10, 40);
 
 
-        Player player = new Player(0, 0, Math.PI * 1 / 5);
+        player = new Player(0, 0, Math.PI * 1 / 5);
         Wall wall = new Wall(10, -500, Math.PI / 2, 1000);
 
-        List<Wall> myWalls = new ArrayList<>();
+        myWalls = new ArrayList<>();
         myWalls.add(wall);
 
 
-        for (int i = 0; i < 100; i++) {
-            Color c = colorAtViewLine(myWalls, player.viewLine((i - 50) * Math.PI / 400));
 
-            g.setFill(c);
-            g.fillRect(i * 3, 40, 3, 20);
-
-//            System.out.println("Drawing at: "+ i + "\n\n");
-        }
 
 
         Pane root = new Pane(canvas);
@@ -68,7 +67,17 @@ public class GameView extends Application {
                 }
             }
         });
+
+        primaryStage.getScene().setOnMouseMoved(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                mousePosition = "X:" + event.getSceneX() + "\nY:" + event.getSceneY();
+            }
+        });
+
         primaryStage.show();
+
+        draw();
     }
 
     public Color colorAtViewLine(List<Wall> walls, ViewLine viewLine) {
@@ -106,5 +115,16 @@ public class GameView extends Application {
 
         assert nearestWall != null;
         return nearestWall.getColorAtDist(distAlongWall);
+    }
+
+    private void draw() {
+        for (int i = 0; i < 100; i++) {
+            Color c = colorAtViewLine(myWalls, player.viewLine((i - 50) * Math.PI / 400));
+
+            canvas.getGraphicsContext2D().setFill(c);
+            canvas.getGraphicsContext2D().fillRect(i * 3, 40, 3, 20);
+            
+//            System.out.println("Drawing at: "+ i + "\n\n");
+        }
     }
 }
