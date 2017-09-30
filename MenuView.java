@@ -1,4 +1,3 @@
-import com.sun.xml.internal.org.jvnet.fastinfoset.stax.LowLevelFastInfosetStreamWriter;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -123,7 +122,6 @@ public class MenuView extends Application {
 
         try {
             URL urlh = getClass().getResource("hmap.txt");
-
             System.out.println(urlh.getPath());
             List<Wall> LoW1 = wb.wallsFromFile(urlh.getPath());
             Wall exith = new Wall(15, 0, Math.PI / 4, 3 * Math.sqrt(2));
