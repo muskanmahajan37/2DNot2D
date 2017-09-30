@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import model.Level;
 import model.Wall;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -37,6 +38,9 @@ public class MenuView extends Application {
         game.onQuit(() -> {
             root.getChildren().remove(game.canvas);
             root.getChildren().add(scrollPane);
+            if (game.win) {
+
+            }
         });
 
         Button btn = new Button();
@@ -56,18 +60,19 @@ public class MenuView extends Application {
 
 
     public List<Level> levels() {
+
+        List<Level> levels = new ArrayList<>();
+
         Level l = new Level();
         l.walls.add(new Wall(10, 0, Math.PI / 3, 100));
-
         l.playerstartx = 0;
         l.playerstarty = 0;
         l.playerstarttheta = 0;
-
-
         l.exitX = 10;
         l.exitY = 0;
         l.exitRadius = 1;
+        levels.add(l);
 
-        return Collections.singletonList(l);
+        return levels;
     }
 }
