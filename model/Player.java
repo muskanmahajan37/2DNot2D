@@ -58,6 +58,6 @@ public class Player {
     }
 
     public void updateTheta(double newTheta) {
-        nextTurnValue = newTheta;
+        nextTurnValue = -newTheta;
     }
 }

@@ -38,22 +38,22 @@ public class GameView extends Application {
         player = new Player(2, 4, 0); //Math.PI * 1 / 5);
 
         Wall wall0 = new Wall(0, 0, Math.PI/2, 60);
-        wall0.color2 = Color.DARKKHAKI;
+        wall0.color2 = Color.BLUE;
 
         Wall wall1 = new Wall(0, 60, 0, 50);
-        wall1.color2 = Color.MEDIUMAQUAMARINE;
+        wall1.color2 = Color.DEEPPINK;
 
         Wall wall2 = new Wall(50, 60, 3*Math.PI/2, 20);
-        wall2.color2 = Color.NAVY;
+        wall2.color2 = Color.GREEN;
 
         Wall wall3 = new Wall(20, 40, 0, 30);
-        wall3.color2 = Color.LIGHTSKYBLUE;
+        wall3.color2 = Color.YELLOW;
 
         Wall wall4 = new Wall(20, 0, Math.PI/2, 40);
-        wall4.color2 = Color.BISQUE;
+        wall4.color2 = Color.DARKGREY;
 
         Wall wall5 = new Wall(0, 0, 0, 20);
-        wall5.color2 = Color.CYAN;
+        wall5.color2 = Color.PURPLE;
 
         myWalls = new ArrayList<>();
         myWalls.add(wall0);
@@ -198,17 +198,21 @@ public class GameView extends Application {
     }
 
     private void draw() {
-        for (int i = 0; i < 201; i++) {
-            Color c = colorAtViewLine(myWalls, player.viewLine((i - 100) * Math.PI / 400));
 
-            GraphicsContext g = canvas.getGraphicsContext2D();
+        GraphicsContext g = canvas.getGraphicsContext2D();
+
+        g.setFill(Color.BLACK);
+        g.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+
+        for (int i = 0; i < 201; i++) {
+            Color c = colorAtViewLine(myWalls, player.viewLine((-i + 100) * Math.PI / 400));
 
             if (c != null) {
                 g.setFill(c);
             } else {
                 g.setFill(Color.BLACK);
             }
-            g.fillRect(i*2 , 40, 2, 20);
+            g.fillRect(i*3 , 50, 3, 20);
 
 //            System.out.println("Drawing at: "+ i + "\n\n");
 
