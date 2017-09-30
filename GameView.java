@@ -29,6 +29,8 @@ public class GameView {
     }
 
     public void createCanvas(Level level) {
+        win = false;
+
         this.level = level;
         this.player = new Player(level.playerstartx, level.playerstarty, level.playerstarttheta);
         AnimationTimer loop = new AnimationTimer() {
@@ -185,7 +187,7 @@ public class GameView {
 
         g.setFill(Color.DARKRED);
         g.setFont(new Font("Roman", 16));
-        g.fillText("DEATHS: " + deaths, 50, 100);
+        g.fillText("DEATHS: " + deaths, 50, 160);
 
         if (win) {
             g.setFill(Color.WHITE);

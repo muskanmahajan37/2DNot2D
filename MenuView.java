@@ -40,6 +40,9 @@ public class MenuView extends Application {
         game.onQuit(() -> {
             root.getChildren().remove(game.canvas);
             root.getChildren().add(scrollPane);
+            if (game.win) {
+
+            }
         });
 
         Button btn = new Button();
