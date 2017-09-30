@@ -15,6 +15,7 @@ import model.Player;
 import model.ViewLine;
 import model.Wall;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class GameView extends Application {
     private Canvas canvas;
     private Player player;
     private List<Wall> myWalls;
-    private String mousePosition;
+    public boolean ignoreMouseEvent = false;
 
     public static void main(String[] args) {
         launch(args);
@@ -80,15 +81,19 @@ public class GameView extends Application {
                 switch (event.getCode()) {
                     case W:
                         player.updatePosition("W");
+                        draw();
                         break;
                     case S:
                         player.updatePosition("S");
+                        draw();
                         break;
                     case A:
                         player.updatePosition("A");
+                        draw();
                         break;
                     case D:
                         player.updatePosition("D");
+                        draw();
                         break;
                 }
             }
@@ -97,7 +102,28 @@ public class GameView extends Application {
         primaryStage.getScene().setOnMouseMoved(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                mousePosition = "X:" + event.getSceneX() + "\nY:" + event.getSceneY();
+                //System.out.println(event.getSceneX() + "   " + event.getX() + "   " + event.getScreenX());
+                if(ignoreMouseEvent) {
+                    ignoreMouseEvent = false;
+                    return;
+                }
+
+                double mouseDeltaX = 0;
+                mouseDeltaX += Math.round(event.getScreenX() - (primaryStage.getX() + (primaryStage.getWidth() / 2.0)));
+                double newTheta = mouseDeltaX;
+                player.updateTheta(newTheta);
+                draw();
+                System.out.println(mouseDeltaX);
+
+                ignoreMouseEvent = true;
+                try {
+                    Robot robot = new Robot();
+                    robot.mouseMove((int) (primaryStage.getX() + (primaryStage.getWidth() / 2.0)),
+                            (int) (primaryStage.getY() + (primaryStage.getHeight() / 2.0)));
+                }
+                catch (AWTException e) {
+                    e.printStackTrace();
+                }
             }
         });
 

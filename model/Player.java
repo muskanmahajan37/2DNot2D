@@ -50,4 +50,8 @@ public class Player {
     public void updatePosition(String direction) {
         nextMoveDirection = direction;
     }
+
+    public void updateTheta(double newTheta) {
+        this.theta = newTheta;
+    }
 }
