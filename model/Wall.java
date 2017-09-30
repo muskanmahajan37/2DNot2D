@@ -24,6 +24,9 @@ public class Wall {
      */
     public double length;
 
+    public Color color1 = Color.CRIMSON;
+    public Color color2 = Color.BLUEVIOLET;
+
     public Wall(double x, double y, double theta, double length) {
         this.x = x;
         this.y = y;
@@ -33,9 +36,9 @@ public class Wall {
 
     public Color getColorAtDist(double dist) {
         if (((int)dist*7) % 2 == 0) {
-            return Color.BLUEVIOLET;
+            return color1;
         } else {
-            return Color.CRIMSON;
+            return color2;
         }
     }
 }

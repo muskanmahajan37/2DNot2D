@@ -38,9 +38,16 @@ public class GameView extends Application {
         player = new Player(2, 4, 0); //Math.PI * 1 / 5);
 
         Wall wall0 = new Wall(0, 0, 0, 11);
+        wall0.color2 = Color.DARKKHAKI;
+
         Wall wall1 = new Wall(10, 0, Math.PI / 2, 11);
+        wall1.color2 = Color.MEDIUMAQUAMARINE;
+
         Wall wall2 = new Wall(10, 10, Math.PI, 11);
+        wall2.color2 = Color.NAVY;
+
         Wall wall3 = new Wall(0, 10, 3 * Math.PI / 2, 11);
+        wall3.color1 = Color.LIGHTSKYBLUE;
 
         myWalls = new ArrayList<>();
         myWalls.add(wall0);
