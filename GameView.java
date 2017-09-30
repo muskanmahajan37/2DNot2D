@@ -1,8 +1,10 @@
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -36,15 +38,39 @@ public class GameView extends Application {
         g.fillRect(10, 10, 10, 40);
 
 
-        player = new Player(0, 0, Math.PI * 1 / 5);
-        Wall wall = new Wall(10, -500, Math.PI / 2, 1000);
+        player = new Player(2, 4, 0); //Math.PI * 1 / 5);
+
+        Wall wall0 = new Wall(0, 0, 0, 11);
+        Wall wall1 = new Wall(10, 0, Math.PI / 2, 11);
+        Wall wall2 = new Wall(10, 10, Math.PI, 11);
+        Wall wall3 = new Wall(0, 10, 3 * Math.PI / 2, 11);
 
         myWalls = new ArrayList<>();
-        myWalls.add(wall);
+        myWalls.add(wall0);
+        myWalls.add(wall1);
+        myWalls.add(wall2);
+        myWalls.add(wall3);
 
 
+        AnimationTimer loop = new AnimationTimer() {
+            private long before = System.currentTimeMillis();
+            private float deltaTime;
 
+            @Override
+            public void handle(long l) {
+                deltaTime = (System.currentTimeMillis() - before) / 1000F;
 
+                player.update(deltaTime);
+                draw();
+
+                before = before + (long) (deltaTime * 1000);
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
 
         Pane root = new Pane(canvas);
         primaryStage.setScene(new Scene(root));
@@ -77,7 +103,7 @@ public class GameView extends Application {
 
         primaryStage.show();
 
-        draw();
+        loop.start();
     }
 
     public Color colorAtViewLine(List<Wall> walls, ViewLine viewLine) {
@@ -112,19 +138,26 @@ public class GameView extends Application {
             }
         } // End for loop
 
-
-        assert nearestWall != null;
-        return nearestWall.getColorAtDist(distAlongWall);
+        if (nearestWall == null) {
+            return null;
+        } else {
+            return nearestWall.getColorAtDist(distAlongWall);
+        }
     }
 
     private void draw() {
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 101; i++) {
             Color c = colorAtViewLine(myWalls, player.viewLine((i - 50) * Math.PI / 400));
 
-            canvas.getGraphicsContext2D().setFill(c);
+            if (c != null) {
+                canvas.getGraphicsContext2D().setFill(c);
+            } else {
+                canvas.getGraphicsContext2D().setFill(Color.BLACK);
+            }
             canvas.getGraphicsContext2D().fillRect(i * 3, 40, 3, 20);
-            
+
 //            System.out.println("Drawing at: "+ i + "\n\n");
+
         }
     }
 }
