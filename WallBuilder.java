@@ -187,7 +187,7 @@ public class WallBuilder {
         // If we ended the row and we're still working on a wall
         // build it
         double dist = Math.abs(startPoint.x - askiiInBools.get(rowNumber).size());
-        result.add(new Wall(startPoint.x, startPoint.y, 0, dist - 1s));
+        result.add(new Wall(startPoint.x, startPoint.y, 0, dist - 1));
         workingOnWall = false;
       }
     } // End for loop (row number
