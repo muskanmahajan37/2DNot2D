@@ -43,11 +43,6 @@ public class WallBuilder {
     for (int columnNumber = 0; columnNumber < askiiInBools.get(largestRowIndex).size(); columnNumber++) {
       boolean workingOnWall = false;
       for (int rowNumber = 0; rowNumber < askiiInBools.size(); rowNumber++) {
-
-        System.out.println("--------------------");
-        System.out.println("row number:    " + rowNumber);
-        System.out.println("column Number: " + columnNumber);
-
         ///////////////
         // Error handeling
         if (askiiInBools.get(rowNumber).size() == 0 || columnNumber >= askiiInBools.get(rowNumber).size()) {
@@ -68,6 +63,8 @@ public class WallBuilder {
           continue;
         }
 
+        /////////////////
+        // Main logic
         if (askiiInBools.get(rowNumber).get(columnNumber)) {
           // If the current spot has a wall
           if (workingOnWall) {
