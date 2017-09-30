@@ -15,7 +15,7 @@ import model.Equation;
 import model.Player;
 import model.ViewLine;
 import model.Wall;
-
+import java.io.FileNotFoundException;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;

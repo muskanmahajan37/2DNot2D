@@ -34,6 +34,13 @@ public class Wall {
         this.length = length;
     }
 
+    /**
+     * Copy constructor.
+     */
+    public Wall(Wall aWall) {
+        this(aWall.x, aWall.y, aWall.theta, aWall.length);
+    }
+
     public Color getColorAtDist(double dist) {
         if (((int)dist*7) % 2 == 0) {
             return color1;
