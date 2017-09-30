@@ -45,6 +45,7 @@ public class MenuView extends Application {
             game.createCanvas(levels().get(0));
             root.getChildren().remove(scrollPane);
             root.getChildren().add(game.canvas);
+            game.canvas.requestFocus();
 
         });
         scrollPaneChild.getChildren().add(btn);

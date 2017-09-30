@@ -28,7 +28,7 @@ public class GameView {
 
     public void createCanvas(Level level) {
         this.level = level;
-
+        this.player = new Player(level.playerstartx, level.playerstarty, level.playerstarttheta);
         AnimationTimer loop = new AnimationTimer() {
             private long before = System.currentTimeMillis();
             private float deltaTime;
@@ -54,7 +54,7 @@ public class GameView {
 
                 before = before + (long) (deltaTime * 1000);
                 try {
-                    Thread.sleep(30);
+                    Thread.sleep(20);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -110,7 +110,6 @@ public class GameView {
             }
         });
 
-        draw();
         loop.start();
     }
 
