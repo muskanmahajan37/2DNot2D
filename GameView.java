@@ -9,6 +9,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import model.Equation;
 import model.Player;
@@ -25,6 +26,10 @@ public class GameView extends Application {
     private List<Wall> myWalls;
     public boolean ignoreMouseEvent = false;
 
+    double exitX = 50;
+    double exitY = 40;
+    boolean win = false;
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -35,7 +40,8 @@ public class GameView extends Application {
 
         canvas = new Canvas(600, 200);
 
-        player = new Player(2, 4, 0); //Math.PI * 1 / 5);
+//        player = new Player(2, 4, 0); //Math.PI * 1 / 5);
+        player = new Player(40, 40, 0);
 
         Wall wall0 = new Wall(0, 0, Math.PI/2, 60);
         wall0.color2 = Color.BLUE;
@@ -81,7 +87,11 @@ public class GameView extends Application {
                 double tmpy = player.y;
                 double tmpA = player.theta;
 
-                player.update(deltaTime);
+                if (!win)
+                    player.update(deltaTime);
+
+                if (Math.abs(player.x - exitX) + Math.abs(player.y - exitY) < 5)
+                    win = true;
 
                 if (tmpx != player.x || tmpy != player.y || tmpA != player.theta)
                     draw();
@@ -221,6 +231,12 @@ public class GameView extends Application {
 
 //            System.out.println("Drawing at: "+ i + "\n\n");
 
+        }
+
+        if (win) {
+            g.setFill(Color.WHITE);
+            g.setFont(new Font("Roman", 100));
+            g.fillText("YOU WIN", 50, 100);
         }
     }
 }
