@@ -1,7 +1,9 @@
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -28,7 +30,7 @@ public class GameView extends Application {
         g.fillRect(10, 10, 10, 40);
 
 
-        Player player = new Player(0, 0, Math.PI * 1/5);
+        Player player = new Player(0, 0, Math.PI * 1 / 5);
         Wall wall = new Wall(10, -500, Math.PI / 2, 1000);
 
         List<Wall> myWalls = new ArrayList<>();
@@ -39,17 +41,33 @@ public class GameView extends Application {
             Color c = colorAtViewLine(myWalls, player.viewLine((i - 50) * Math.PI / 400));
 
             g.setFill(c);
-            g.fillRect(i*3, 40, 3, 20 );
+            g.fillRect(i * 3, 40, 3, 20);
 
 //            System.out.println("Drawing at: "+ i + "\n\n");
         }
 
 
-
-
-
         Pane root = new Pane(canvas);
         primaryStage.setScene(new Scene(root));
+        primaryStage.getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                switch (event.getCode()) {
+                    case W:
+                        player.updatePosition("W");
+                        break;
+                    case S:
+                        player.updatePosition("S");
+                        break;
+                    case A:
+                        player.updatePosition("A");
+                        break;
+                    case D:
+                        player.updatePosition("D");
+                        break;
+                }
+            }
+        });
         primaryStage.show();
     }
 

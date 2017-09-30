@@ -20,4 +20,18 @@ public class Player {
         return new ViewLine (x, y, theta + angle);
     }
 
+    public void updatePosition(String direction) {
+        if (direction.equals("W")) {
+            this.y += 1;
+        }
+        else if (direction.equals("S")) {
+            this.y -= 1;
+        }
+        else if (direction.equals("A")) {
+            this.x -= 1;
+        }
+        else if (direction.equals("D")) {
+            this.x += 1;
+        }
+    }
 }
