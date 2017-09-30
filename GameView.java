@@ -5,7 +5,6 @@ import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -67,7 +66,7 @@ public class GameView extends Application {
 
                 before = before + (long) (deltaTime * 1000);
                 try {
-                    Thread.sleep(50);
+                    Thread.sleep(20);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -122,9 +121,8 @@ public class GameView extends Application {
 
                 double mouseDeltaX = 0;
                 mouseDeltaX += Math.round(event.getScreenX() - (primaryStage.getX() + (primaryStage.getWidth() / 2.0)));
-                double newTheta = mouseDeltaX / 200 * (Math.PI / 2);
+                double newTheta = mouseDeltaX / 10;
                 player.updateTheta(newTheta);
-                System.out.println(newTheta);
 
                 ignoreMouseEvent = true;
                 try {
@@ -182,15 +180,15 @@ public class GameView extends Application {
     }
 
     private void draw() {
-        for (int i = 0; i < 101; i++) {
-            Color c = colorAtViewLine(myWalls, player.viewLine((i - 50) * Math.PI / 400));
+        for (int i = 0; i < 201; i++) {
+            Color c = colorAtViewLine(myWalls, player.viewLine((i - 100) * Math.PI / 400));
 
             if (c != null) {
                 canvas.getGraphicsContext2D().setFill(c);
             } else {
                 canvas.getGraphicsContext2D().setFill(Color.BLACK);
             }
-            canvas.getGraphicsContext2D().fillRect(i * 3, 40, 3, 20);
+            canvas.getGraphicsContext2D().fillRect(i*2 , 40, 2, 20);
 
 //            System.out.println("Drawing at: "+ i + "\n\n");
 

@@ -13,6 +13,9 @@ public class Player {
     /** On this.update() move in this direction */
     String nextMoveDirection;
 
+    /** On this.update() turn in the direction */
+    double nextTurnValue;
+
     public Player(double x, double y, double theta) {
         this.x = x;
         this.y = y;
@@ -24,6 +27,10 @@ public class Player {
     }
 
     public void update(float deltaTime) {
+        this.theta += nextTurnValue * deltaTime;
+        System.out.println(nextTurnValue * deltaTime);
+        nextTurnValue = 0;
+
         if (nextMoveDirection == null)
             return;
 
@@ -52,6 +59,6 @@ public class Player {
     }
 
     public void updateTheta(double newTheta) {
-        this.theta = newTheta;
+        nextTurnValue = newTheta;
     }
 }
