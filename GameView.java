@@ -65,7 +65,7 @@ public class GameView extends Application {
 
                 before = before + (long) (deltaTime * 1000);
                 try {
-                    Thread.sleep(50);
+                    Thread.sleep(20);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -74,6 +74,24 @@ public class GameView extends Application {
 
         Pane root = new Pane(canvas);
         primaryStage.setScene(new Scene(root));
+        primaryStage.getScene().setOnMouseEntered(new EventHandler<MouseEvent>() {
+
+
+            @Override
+            public void handle(MouseEvent event) {
+                primaryStage.getScene().setCursor(javafx.scene.Cursor.NONE);
+            }
+        });
+        primaryStage.getScene().setOnMouseExited(new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent event) {
+                primaryStage.getScene().setCursor(javafx.scene.Cursor.DEFAULT);
+            }
+        });
+
+
+
         primaryStage.getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
@@ -105,7 +123,7 @@ public class GameView extends Application {
 
                 double mouseDeltaX = 0;
                 mouseDeltaX += Math.round(event.getScreenX() - (primaryStage.getX() + (primaryStage.getWidth() / 2.0)));
-                double newTheta = mouseDeltaX / 70;
+                double newTheta = mouseDeltaX / 10;
                 player.updateTheta(newTheta);
 
                 ignoreMouseEvent = true;
