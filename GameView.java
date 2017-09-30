@@ -3,11 +3,15 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.Equation;
 import model.Player;
 import model.ViewLine;
 import model.Wall;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameView extends Application {
     public static void main(String[] args) {
@@ -24,18 +28,65 @@ public class GameView extends Application {
         g.fillRect(10, 10, 10, 40);
 
 
-        Player player = new Player(0, 0, 0);
-        Wall wall = new Wall(10, -5, Math.PI / 2, 1000);
+        Player player = new Player(0, 0, Math.PI * 1/5);
+        Wall wall = new Wall(10, -500, Math.PI / 2, 1000);
 
-        ViewLine viewLine  = player.viewLine(0);
+        List<Wall> myWalls = new ArrayList<>();
+        myWalls.add(wall);
 
-        Equation e = new Equation(viewLine, wall);
 
-        System.out.println(e.distanceAlongViewLine());
-        System.out.println(e.distanceAlongWall());
+        for (int i = 0; i < 100; i++) {
+            Color c = colorAtViewLine(myWalls, player.viewLine((i - 50) * Math.PI / 400));
+
+            g.setFill(c);
+            g.fillRect(i*3, 40, 3, 20 );
+
+//            System.out.println("Drawing at: "+ i + "\n\n");
+        }
+
+
+
+
 
         Pane root = new Pane(canvas);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
+    }
+
+    public Color colorAtViewLine(List<Wall> walls, ViewLine viewLine) {
+
+        Wall nearestWall = null;
+        double distAlongWall = Double.POSITIVE_INFINITY;
+        double currentClosestDist = Double.POSITIVE_INFINITY;
+
+        for (Wall w : walls) {
+
+            Equation e = new Equation(viewLine, w);
+
+//            System.out.println(viewLine.x + " " + viewLine.y + " " + viewLine.theta);
+//            System.out.println(w.x + " " + w.y + " " + w.theta);
+
+            double wallDist = e.distanceAlongWall();
+            double viewDist = e.distanceAlongViewLine();
+
+            if (viewDist < 0)
+                continue;
+
+            if (wallDist < 0)
+                continue;
+
+            if (wallDist > w.length)
+                continue;
+
+            if (viewDist < currentClosestDist) {
+                nearestWall = w;
+                currentClosestDist = viewDist;
+                distAlongWall = wallDist;
+            }
+        } // End for loop
+
+
+        assert nearestWall != null;
+        return nearestWall.getColorAtDist(distAlongWall);
     }
 }

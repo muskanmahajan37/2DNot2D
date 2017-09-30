@@ -2,13 +2,13 @@ package model;
 
 public class ViewLine {
     /** X position of start */
-    double x;
+    public double x;
 
     /** Y position of start */
-    double y;
+    public double y;
 
     /** Angle the view extends from starting point */
-    double theta;
+    public double theta;
 
 
     public ViewLine(double x, double y, double theta) {
