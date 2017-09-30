@@ -1,3 +1,4 @@
+import com.sun.xml.internal.org.jvnet.fastinfoset.stax.LowLevelFastInfosetStreamWriter;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -6,9 +7,12 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import model.Baddie;
 import model.Level;
 import model.Wall;
 
+import java.awt.geom.Point2D;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -92,16 +96,46 @@ public class MenuView extends Application {
 
         List<Level> levels = new ArrayList<>();
 
-        Level l = new Level();
-        l.walls.add(new Wall(10, 0, Math.PI / 3, 100));
-        l.playerstartx = 0;
-        l.playerstarty = 0;
-        l.playerstarttheta = 0;
-        l.exitX = 10;
-        l.exitY = 0;
-        l.exitRadius = 1;
+        List<Wall> walls = new ArrayList<Wall>();
+        walls.add(new Wall(10, 0, Math.PI / 3, 100));
+        Level l = new Level(walls, 0, 0, 0, 10, 0, 1, "testmap");
+
         levels.add(l);
+
+        Baddie baddie = new Baddie(7, 0, 1);
+        List<Point2D> points = new ArrayList<>(3);
+        points.add(new Point2D.Double(7, 0));
+        points.add(new Point2D.Double(7, 4));
+        points.add(new Point2D.Double(3, 2));
+        baddie.setPatrol(points, 1);
+
+        l.addBaddie(baddie);
+
 
         return levels;
     }
+
+    public List<Level> initLevels() {
+        WallBuilder wb = new WallBuilder();
+
+        List<Level> LoL = new ArrayList<Level>();
+
+        try {
+            List<Wall> LoW1 = wb.wallsFromFile("C:\\Users\\Jason\\IdeaProjects\\2DNot2D\\src\\hmap.txt");
+            Wall exith = new Wall(15, 0, Math.PI / 4, 3 * Math.sqrt(2));
+            Level hmap = new Level(LoW1, 1, 7, 0, 16, 1, 2, "H");
+            LoL.add(hmap);
+
+            List<Wall> LoW2 = wb.wallsFromFile("C:\\Users\\Jason\\IdeaProjects\\2DNot2D\\src\\gmap.txt");
+            Wall exitg = new Wall(11, 5, 0, 1);
+            Level gmap = new Level(LoW2, 13, 8, Math.PI / 2, 11, 5, 2, "G");
+            LoL.add(gmap);
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return LoL;
+    }
+
 }

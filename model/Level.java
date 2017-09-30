@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Level {
-    public List<Wall> walls = new ArrayList<>();
 
+    public List<Wall> walls = new ArrayList<>();
+    public List<Baddie> baddies = new ArrayList<>();
+
+    public String name;
     public double playerstartx;
     public double playerstarty;
     public double playerstarttheta;
@@ -14,6 +17,21 @@ public class Level {
     public double exitX;
     public double exitY;
     public double exitRadius;
+
+    public Baddie baddie;
+
+    public Level (List<Wall> walls, double playerstartX, double playerstarty, double playerstarttheta, double exitX,
+                  double exitY, double exitRadius, String name) {
+        this.walls = walls;
+        this.playerstartx = playerstartX;
+        this.playerstarty = playerstarty;
+        this.playerstarttheta = playerstarttheta;
+        this.exitX = exitX;
+        this.exitY = exitY;
+        this.exitRadius = exitRadius;
+        this.name = name;
+    }
+
 
     public Level scale(double scale) {
         for (Wall w : walls) {
@@ -27,5 +45,17 @@ public class Level {
         exitY = exitY * scale;
         exitRadius = exitRadius * scale;
         return this;
+    }
+
+    public void addBaddie(Baddie toAdd) {
+        baddies.add(toAdd);
+        walls.add(toAdd.wallVert);
+        walls.add(toAdd.wallHoriz);
+    }
+
+    public void updateBaddies() {
+        for (Baddie b : baddies) {
+            b.updateBaddie();
+        }
     }
 }
