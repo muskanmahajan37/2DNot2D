@@ -1,10 +1,7 @@
 import javafx.animation.AnimationTimer;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -25,7 +22,7 @@ public class GameView {
     private long timeOfWin = 0;
     private Runnable onQuitFunc = null;
 
-    public  GameView(Stage primaryStage) {
+    public GameView(Stage primaryStage) {
         this.primaryStage = primaryStage;
     }
 
@@ -86,7 +83,8 @@ public class GameView {
                     onQuitFunc.run();
                     break;
                 case R:
-
+                    player = new Player(level.playerstartx, level.playerstarty, level.playerstarttheta);
+                    break;
             }
         });
 
@@ -142,7 +140,7 @@ public class GameView {
                 continue;
 
             if (viewDist <= 0.1)
-                player = new Player(2, 4, 0);
+                player = new Player(level.playerstartx, level.playerstarty, level.playerstarttheta);
 
             if (viewDist < currentClosestDist) {
                 nearestWall = w;
