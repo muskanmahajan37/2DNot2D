@@ -34,14 +34,7 @@ public class GameView extends Application {
     boolean win = false;
 
     public static void main(String[] args) {
-
-        WallBuilder wb = new WallBuilder();
-        try {
-            wb.wallsFromFile("testWalls.txt");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        //launch(args);
+        launch(args);
     }
 
     @Override
