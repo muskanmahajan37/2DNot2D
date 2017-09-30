@@ -20,8 +20,8 @@ public class Level {
 
     public Baddie baddie;
 
-    public Level (List<Wall> walls, double playerstartX, double playerstarty, double playerstarttheta, double exitX,
-                  double exitY, double exitRadius, String name) {
+    public Level(List<Wall> walls, double playerstartX, double playerstarty, double playerstarttheta, double exitX,
+                 double exitY, double exitRadius, String name) {
         this.walls = walls;
         this.playerstartx = playerstartX;
         this.playerstarty = playerstarty;
