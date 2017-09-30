@@ -41,11 +41,11 @@ public class Player {
             this.x += 3 * deltaTime * Math.cos(theta + Math.PI);
             this.y += 3 * deltaTime * Math.sin(theta + Math.PI);
         }
-        else if (nextMoveDirection.equals("A")) {
+        else if (nextMoveDirection.equals("D")) {
             this.x += 3 * deltaTime * Math.cos(theta + 3 * Math.PI / 2);
             this.y += 3 * deltaTime * Math.sin(theta + 3 * Math.PI / 2);
         }
-        else if (nextMoveDirection.equals("D")) {
+        else if (nextMoveDirection.equals("A")) {
             this.x += 3 * deltaTime * Math.cos(theta + Math.PI / 2);
             this.y += 3 * deltaTime * Math.sin(theta + Math.PI / 2);
         }
