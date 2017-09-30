@@ -1,6 +1,7 @@
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.EventHandler;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -75,25 +76,22 @@ public class GameView extends Application {
 
         Pane root = new Pane(canvas);
         primaryStage.setScene(new Scene(root));
+        primaryStage.getScene().setCursor(Cursor.NONE);
         primaryStage.getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
                 switch (event.getCode()) {
                     case W:
                         player.updatePosition("W");
-                        draw();
                         break;
                     case S:
                         player.updatePosition("S");
-                        draw();
                         break;
                     case A:
                         player.updatePosition("A");
-                        draw();
                         break;
                     case D:
                         player.updatePosition("D");
-                        draw();
                         break;
                 }
             }
@@ -110,10 +108,9 @@ public class GameView extends Application {
 
                 double mouseDeltaX = 0;
                 mouseDeltaX += Math.round(event.getScreenX() - (primaryStage.getX() + (primaryStage.getWidth() / 2.0)));
-                double newTheta = mouseDeltaX;
+                double newTheta = mouseDeltaX/200*(Math.PI/2);
                 player.updateTheta(newTheta);
-                draw();
-                System.out.println(mouseDeltaX);
+                System.out.println(newTheta);
 
                 ignoreMouseEvent = true;
                 try {
