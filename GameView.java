@@ -97,7 +97,7 @@ public class GameView extends Application {
                 if (!win)
                     player.update(deltaTime);
 
-                if (Math.abs(player.x - exitX) + Math.abs(player.y - exitY) < 5)
+                if (Math.abs(player.x - exitX) + Math.abs(player.y - exitY) < 10)
                     win = true;
 
                 if (tmpx != player.x || tmpy != player.y || tmpA != player.theta)
