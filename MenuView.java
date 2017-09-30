@@ -51,7 +51,7 @@ public class MenuView extends Application {
         GameView game = new GameView(primaryStage);
 
         List<Button> buttons = new ArrayList<>();
-        List<Level> levels = levels(); // initLevels();
+        List<Level> levels = initLevels(); // initLevels();
 
         int levelNum = 0;
         for (Level l : levels) {
@@ -128,6 +128,7 @@ public class MenuView extends Application {
             List<Wall> LoW1 = wb.wallsFromFile(urlh.getPath());
             Wall exith = new Wall(15, 0, Math.PI / 4, 3 * Math.sqrt(2));
             Level hmap = new Level(LoW1, 1, 7, 0, 16, 1, 2, "H");
+            System.out.println(LoW1);
             LoL.add(hmap);
 
             URL urlg = getClass().getResource("gmap.txt");

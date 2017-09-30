@@ -1,5 +1,6 @@
 package model;
 
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.paint.Color;
 
 public class Wall {
@@ -47,5 +48,16 @@ public class Wall {
         } else {
             return color2;
         }
+    }
+
+    public String toString() {
+        String result = "";
+        result += "[Wall: ";
+        result += "X: " + Double.toString(x) + "  ";
+        result += "Y: " + Double.toString(y) + "  ";
+        result += "Theta: " + Double.toString(theta) + "  ";
+        result += "length: " + Double.toString(length);
+        result += "]\n";
+        return result;
     }
 }
