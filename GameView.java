@@ -187,7 +187,7 @@ public class GameView {
 
         g.setFill(Color.DARKRED);
         g.setFont(new Font("Roman", 16));
-        g.fillText("DEATHS: " + deaths, 50, 100);
+        g.fillText("DEATHS: " + deaths, 50, 160);
 
         if (win) {
             g.setFill(Color.WHITE);
