@@ -56,7 +56,7 @@ public class MenuView extends Application {
         for (Level l : levels) {
             Button btn = new Button();
             levelNum++;
-            btn.setText("Level #" + levelNum + " -  " + l);
+            btn.setText("Level #" + levelNum + " -  " + l.name);
             btn.setOnAction(event -> {
                 game.createCanvas(l);
                 root.getChildren().remove(scrollPane);
