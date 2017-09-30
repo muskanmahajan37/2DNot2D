@@ -22,6 +22,9 @@ import java.util.List;
 public class GameView extends Application {
     private Canvas canvas;
     private Player player;
+    private int startX;
+    private int startY;
+    private int startT;
     private List<Wall> myWalls;
     public boolean ignoreMouseEvent = false;
 
@@ -36,6 +39,10 @@ public class GameView extends Application {
         canvas = new Canvas(600, 200);
 
         player = new Player(2, 4, 0); //Math.PI * 1 / 5);
+
+        startX = 2;
+        startY = 4;
+        startT = 0;
 
         Wall wall0 = new Wall(0, 0, Math.PI/2, 60);
         wall0.color2 = Color.BLUE;
@@ -188,6 +195,9 @@ public class GameView extends Application {
             if (wallDist > w.length)
                 continue;
 
+            if (viewDist <= 0.1)
+                player = new Player(2, 4, 0);
+
             if (viewDist < currentClosestDist) {
                 nearestWall = w;
                 currentClosestDist = viewDist;
@@ -220,6 +230,7 @@ public class GameView extends Application {
             g.fillRect(i*3 , 50, 3, 20);
 
 //            System.out.println("Drawing at: "+ i + "\n\n");
+
 
         }
     }
