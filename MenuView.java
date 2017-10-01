@@ -126,6 +126,12 @@ public class MenuView extends Application {
         Level level;
         URL url;
         Wall exitWall;
+
+        // Exit walls should be GREEN, GREEN
+
+        // use level.scale(factor) to scale completely scale a level
+
+        // use level.randomizeWallColor1() to randomize the color of each wall's stripe 1
         
         try {
 //            URL urlh = getClass().getResource("hmap.txt");
@@ -169,23 +175,17 @@ public class MenuView extends Application {
 //            }
 //            Level gmap = new Level(LoW2, 13, 8, Math.PI / 2, 11, 5, 2, "G");
 //            LoL.add(gmap);
-            url = getClass().getResource("hmap.txt");
+            url = getClass().getResource("AJLevel1.txt");
             LoW = wb.wallsFromFile(url.getPath());
 
-            exitWall = new Wall(6, 12, -Math.PI / 4, Math.sqrt(2));
-            exitWall.color1 = Color.LIGHTGREEN;
-            exitWall.color2 = Color.LIGHTGREEN;
-            LoW.add(exitWall);
-            
-            level = new Level(LoW, 2, 5, 0, 7, 12, 1.2, "Hotel H");
-            LoL.add(level);
+            level = new Level(LoW, 1, 4, 0, 5, 6, 2, "Easy Square");
+            level.randomizeWallColor1();
 
-            for (Wall w : LoW) {
-                w.color1 = Color.rgb(
-                        (int) (Math.random() * 255),
-                        (int) (Math.random() * 255),
-                        (int) (Math.random() * 255));
-            }
+            exitWall = new Wall(4, 5, -Math.PI / 4, 8);
+            exitWall.color1 = Color.GREEN;
+            exitWall.color2 = Color.GREEN;
+            LoW.add(exitWall);
+            LoL.add(level);
 
             url = getClass().getResource("gmap.txt");
             LoW = wb.wallsFromFile(url.getPath());

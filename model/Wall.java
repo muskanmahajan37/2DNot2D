@@ -42,9 +42,13 @@ public class Wall {
         this(aWall.x, aWall.y, aWall.theta, aWall.length);
     }
 
-    int width = 1;
+    /**
+     * Increase to make the stripes smaller, to make more stripes in the same amount of length
+     */
+    public double density = 1;
+
     public Color getColorAtDist(double dist) {
-        if ((dist) % (2 * width) < width) {
+        if ((dist * density) % 2 < 1) {
             return color1;
         } else {
             return color2;

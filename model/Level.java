@@ -1,5 +1,7 @@
 package model;
 
+import javafx.scene.paint.Color;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,8 +19,6 @@ public class Level {
     public double exitX;
     public double exitY;
     public double exitRadius;
-
-    public Baddie baddie;
 
     public Level(List<Wall> walls, double playerstartX, double playerstarty, double playerstarttheta, double exitX,
                  double exitY, double exitRadius, String name) {
@@ -44,6 +44,22 @@ public class Level {
         exitX = exitX * scale;
         exitY = exitY * scale;
         exitRadius = exitRadius * scale;
+        return this;
+    }
+
+    public Level setWallDensity(double density) {
+        for (Wall w : walls)
+            w.density = density;
+        return this;
+    }
+
+    public Level randomizeWallColor1() {
+        for (Wall w : this.walls) {
+            w.color1 = Color.rgb(
+                    (int) (Math.random() * 255),
+                    (int) (Math.random() * 255),
+                    (int) (Math.random() * 255));
+        }
         return this;
     }
 
