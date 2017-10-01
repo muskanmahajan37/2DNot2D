@@ -182,11 +182,11 @@ public class MenuView extends Application {
             url = getClass().getResource("AJLevel1.txt");
             LoW = wb.wallsFromFile(url.getPath());
 
-            level = new Level(LoW, 1, 4, 0, 5, 6, 2, "Easy Square");
+            level = new Level(LoW, 1, 1, 0, 6, 5, 1.3, "Easy Square");
             level.randomizeWallColor1();
             level.setWallDensity(3);
 
-            exitWall = new Wall(4, 5, -Math.PI / 4, 8);
+            exitWall = new Wall(5, 5, -Math.PI / 4, 8);
             exitWall.color1 = Color.GREEN;
             exitWall.color2 = Color.GREEN;
             LoW.add(exitWall);
