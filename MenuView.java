@@ -120,9 +120,12 @@ public class MenuView extends Application {
         WallBuilder wb = new WallBuilder();
 
         List<Level> LoL = new ArrayList<>();
-        List<Wall> LoW = new ArrayList<>();
+
+        // These vars should be set by each level that uses them
+        List<Wall> LoW;
         Level level;
         URL url;
+        Wall exitWall;
         
         try {
 //            URL urlh = getClass().getResource("hmap.txt");
@@ -168,10 +171,14 @@ public class MenuView extends Application {
 //            LoL.add(gmap);
             url = getClass().getResource("hmap.txt");
             LoW = wb.wallsFromFile(url.getPath());
+
+            exitWall = new Wall(6, 12, -Math.PI / 4, Math.sqrt(2));
+            exitWall.color1 = Color.LIGHTGREEN;
+            exitWall.color2 = Color.LIGHTGREEN;
+            LoW.add(exitWall);
             
-            Level hmap = new Level(LoW, 1, 5, 0, 16, 1, 2, "H");
-            System.out.println(LoW);
-            LoL.add(hmap);
+            level = new Level(LoW, 2, 5, 0, 7, 12, 1.2, "Hotel H");
+            LoL.add(level);
 
             for (Wall w : LoW) {
                 w.color1 = Color.rgb(
@@ -181,8 +188,8 @@ public class MenuView extends Application {
             }
 
             url = getClass().getResource("gmap.txt");
-            List<Wall> LoW2 = wb.wallsFromFile(url.getPath());
-            LoL.add(new Level(LoW2, 13, 8, Math.PI / 2, 11, 5, 2, "G"));
+            LoW = wb.wallsFromFile(url.getPath());
+            LoL.add(new Level(LoW, 13, 8, Math.PI / 2, 11, 5, 2, "G"));
 
 
             // Level 3
@@ -217,9 +224,9 @@ public class MenuView extends Application {
             LoW.add(wall4);
             LoW.add(wall5);
             LoW.add(exit);
-            Level levelL = new Level(LoW, 2, 4, 0,
+            level = new Level(LoW, 2, 4, 0,
                     50, 40, 10, "Tiny L");
-            LoL.add(levelL.scale(0.2));
+            LoL.add(level.scale(0.2));
 
             //level 4
             Wall wallI0 = new Wall(0, 0, Math.PI / 2, 40);
@@ -265,7 +272,6 @@ public class MenuView extends Application {
             LoW.add(wallIExit);
             LoL.add(new Level(LoW, 2, 4, Math.PI,
                     40, 40, 10, "The I"));
-
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
