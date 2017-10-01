@@ -1,8 +1,6 @@
 package model;
 
-import java.awt.*;
 import java.awt.geom.Point2D;
-import java.util.ArrayList;
 import java.util.List;
 
 import javafx.scene.paint.Color;
@@ -12,37 +10,34 @@ import javafx.scene.paint.Color;
  */
 public class Baddie {
 
-  public double positionX;
-  public double positionY;
+  private double positionX;
+  private double positionY;
+  private double speed;
+  private double size;
 
   public Wall wallHoriz;
   public Wall wallVert;
 
   // This is the vector's needed to get to the next point
-  List<Point2D> patrolDeltas;
-  Point2D currentStandardizedVector;
-  double speed;
-  boolean patroling;
-  int currentPatrolDeltaIndex;
-  double initialDistance;
-  long timesCalled;
+  private List<Point2D> patrolPositions;
+  private int currentPatrolPosition;
+  private double traveled;
+  private double distToTravel;
+  private Point2D unitVector;
 
-
-  double size;
    public Baddie(double x, double y, double size) {
      positionX = x;
      positionY = y;
      this.size = size;
 
-     double wallLength = 1 * size;
-     wallHoriz = new Wall(x - (wallLength / 2), y, 0, wallLength);
-     wallVert = new Wall(x, y + (wallLength / 2), Math.PI * 3 / 2, wallLength);
-
-     patroling = false;
-     timesCalled = 0;
+     wallHoriz = new Wall(0, 0, 0, size);
+     wallVert = new Wall(0, 0, Math.PI * 3 / 2, size);
+     moveWallsToBaddiePos();
 
      wallHoriz.color1 = Color.WHITE;
+     wallHoriz.color2 = Color.WHITE;
      wallVert.color1 = Color.WHITE;
+     wallVert.color2 = Color.WHITE;
    }
 
   public void scaleBaddie(double scaleBy) {
@@ -60,114 +55,73 @@ public class Baddie {
   }
 
 
-  void updateWalls() {
-    double wallLength = 1 * size;
-    wallVert.x = positionX - (wallLength / 2);
-    wallVert.y = positionY;
+  private void moveWallsToBaddiePos() {
+    wallHoriz.x = positionX - (size / 2);
+    wallHoriz.y = positionY;
 
-    wallHoriz.x = positionX;
-    wallHoriz.y = positionY + (wallLength / 2);
+    wallVert.x = positionX;
+    wallVert.y = positionY + (size / 2);
   }
+
+
+
+
 
   public void setPatrol(List<Point2D> points, double speed) {
-    //this.patrolPts = points;
-    List<Point2D> deltas = new ArrayList<Point2D>(points.size());
-    for (int i = 0; i < points.size(); i++) {
-      if (i == points.size() - 1) {
-        double xDelta = points.get(i).getX() - points.get(0).getX();
-        double yDelta = points.get(i).getY() - points.get(0).getY();
-        deltas.add(i, new Point2D.Double(xDelta, yDelta));
-      } else {
-        double xDelta = points.get(i).getX() - points.get(i + 1).getX();
-        double yDelta = points.get(i).getY() - points.get(i + 1).getY();
-        deltas.add(i, new Point.Double(xDelta, yDelta));
-      }
-    }
-
-
-    currentPatrolDeltaIndex = 0;
-    timesCalled = 0;
-    this.patrolDeltas = deltas;
-    nextInitialDistance(); // set the initialDistance
-    updateStandardVector(); // set the standardVector
-    this.speed = speed/60;
-    this.patroling = true;
+    this.patrolPositions = points;
+    this.currentPatrolPosition = points.size() - 1; // reset by nextPatrolIndex()
+    this.speed = speed;
+    this.traveled = 0;
+    this.distToTravel = 0;
   }
 
-  void nextInitialDistance() {
-    if (currentPatrolDeltaIndex == patrolDeltas.size() - 1) {
-      initialDistance = Math.sqrt(Math.pow(patrolDeltas.get(0).getX(), 2) +
-                                  Math.pow(patrolDeltas.get(0).getY(), 2));
-    } else {
-      initialDistance = Math.sqrt(Math.pow(patrolDeltas.get(currentPatrolDeltaIndex + 1).getX(), 2) +
-                                  Math.pow(patrolDeltas.get(currentPatrolDeltaIndex + 1).getY(), 2));
-    }
-  }
-
-  private int nextPatrolDeltaIndex() {
-    if (currentPatrolDeltaIndex == patrolDeltas.size() - 1) {
-      currentPatrolDeltaIndex = 0;
+  private int nextPatrolIndex() {
+    if (currentPatrolPosition == patrolPositions.size() - 1) {
       return 0;
     } else {
-      currentPatrolDeltaIndex += 1;
-      return currentPatrolDeltaIndex;
+      return currentPatrolPosition + 1;
     }
   }
 
+    public void updateBaddie(double deltaTime) {
+        //Modify the x,y by the standardized vector
+        // Check to see if we are >= target distance
+        //   if yes:
+        //      Update standardized vector
+        //      Reset distance traveled to 0
+        //        (reset time to 0)
+        //   if no:
+        //      Keep on the same direction
+//        System.out.println("traveled" + traveled + " >= " + "distacnce" + distToTravel);
 
-  private double getScalerForStandardization() {
-    double x = patrolDeltas.get(currentPatrolDeltaIndex).getX();
-    double y = patrolDeltas.get(currentPatrolDeltaIndex).getY();
-    double a = 1.0;
-    double b = 2*(x + y);
-    double c = -1 * ((speed - (Math.pow(x, 2) + Math.pow(y, 2))) / 2);
+        if (traveled >= distToTravel) {
+            // change move direction (unitVector)
+            System.out.println("this= "+ this);
+            currentPatrolPosition = nextPatrolIndex();
+            System.out.println("Want to travel to x=" + patrolPositions.get(currentPatrolPosition).getX() + ", y=" +
+                    patrolPositions.get(currentPatrolPosition).getY());
 
-    return (((-1)*b) + Math.sqrt(Math.pow(b, 2) - (4*a*c)))/(2*a);
-  }
+            double deltaX = patrolPositions.get(currentPatrolPosition).getX() - positionX ;
+            double deltaY = patrolPositions.get(currentPatrolPosition).getY() - positionY;
 
-  private void updateStandardVector() {
-    // Will update standardVector to whatever the index is currently point to.
-    double scaler = getScalerForStandardization();
-    currentStandardizedVector =
-            new Point2D.Double(patrolDeltas.get(currentPatrolDeltaIndex).getX() * scaler,
-                               patrolDeltas.get(currentPatrolDeltaIndex).getY() * scaler);
-  }
+            this.distToTravel = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
+            this.traveled = 0;
+            System.out.println("DIST TO TRAVEL = " + distToTravel);
+            // Vector of length 1 pointing towards the patrol point to move to.
+            this.unitVector = new Point2D.Double(deltaX / distToTravel, deltaY / distToTravel);
+            System.out.println("Travel by x=" + unitVector.getX() + ", y=" + unitVector.getY());
 
-  private void modifyXYByStandard() {
-    // modify the current x,y by the currentStandardizedVector
-    this.positionX += currentStandardizedVector.getX();
-    this.positionY += currentStandardizedVector.getY();
-    updateWalls();
-  }
+        } else {
+            this.positionX += deltaTime * speed * unitVector.getX();
+            this.positionY += deltaTime * speed * unitVector.getY();
+            moveWallsToBaddiePos();
 
-  public void updateBaddie() {
-    if (patroling) {
-
-      //Modify the x,y by the standardized vector
-      // Check to see if we are >= target distance
-      //   if yes:
-      //      Update standardized vector
-      //      Reset distance traveled to 0
-      //        (reset time to 0)
-      //   if no:
-      //      Keep on the same direction
-
-
-      modifyXYByStandard();
-
-      if (speed * timesCalled >= initialDistance) {
-        // Update standardized vector
-        currentPatrolDeltaIndex = nextPatrolDeltaIndex();
-        nextInitialDistance();
-        updateStandardVector();
-        // Reset timesCalled to 0;
-        timesCalled = 0;
-      } else {
-        // Do nothing, keep going @ same vector
-        timesCalled += 1;
-      }
+//            System.out.println("T=" + traveled);
+            if (Math.random() > 0.99)
+                System.out.println("x="+this.positionX +"\nt="+traveled+"\n\n");
+            traveled += speed * deltaTime;
+        }
     }
-  }
 
 
   /*
@@ -196,4 +150,10 @@ public class Baddie {
               number of Updates = 0;
 
    */
+
+  public String toString() {
+    String val = "";
+    val += "Baddie [x=" + positionX + ", y=" + positionY + "]";
+    return val;
+  }
 }

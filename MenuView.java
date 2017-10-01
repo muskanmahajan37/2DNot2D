@@ -51,7 +51,8 @@ public class MenuView extends Application {
         GameView game = new GameView(primaryStage);
 
         List<Button> buttons = new ArrayList<>();
-        List<Level> levels = initLevels(); // initLevels();
+//        List<Level> levels = levels();
+        List<Level> levels = initLevels();
 
         int levelNum = 0;
         for (Level l : levels) {
@@ -97,9 +98,12 @@ public class MenuView extends Application {
 
         List<Level> levels = new ArrayList<>();
 
-        List<Wall> walls = new ArrayList<Wall>();
-        walls.add(new Wall(10, 0, Math.PI / 3, 100));
-        Level l = new Level(walls, 0, 0, 0, 10, 0, 1, "testmap");
+        List<Wall> walls = new ArrayList<>();
+        walls.add(new Wall(10, 0, Math.PI / 2, 100));
+        walls.get(0).color1 = Color.MAROON;
+        walls.add(new Wall(0, 0, Math.PI / 2, 100));
+        walls.get(1).color1 = Color.AQUAMARINE;
+        Level l = new Level(walls, 0, -1, 0, 10, 0, 1, "testmap");
 
         levels.add(l);
 
@@ -120,73 +124,39 @@ public class MenuView extends Application {
         WallBuilder wb = new WallBuilder();
 
         List<Level> LoL = new ArrayList<>();
-        List<Wall> LoW = new ArrayList<>();
+
+        // These vars should be set by each level that uses them
+        List<Wall> LoW;
         Level level;
         URL url;
-        
+        Wall exitWall;
+
+        // Exit walls should be GREEN, GREEN
+
+        // use level.scale(factor) to scale completely scale a level
+
+        // use level.randomizeWallColor1() to randomize the color of each wall's stripe 1
+
         try {
-//            URL urlh = getClass().getResource("hmap.txt");
-//            System.out.println(urlh.getPath());
-//            List<Wall> LoW1 = wb.wallsFromFile(urlh.getPath());
-//
-//            for (Wall w : LoW1) {
-//                w.color1 = Color.rgb((int)(Math.random() * 255),
-//                                     (int)(Math.random() * 255),
-//                                     (int)(Math.random() * 255));
-//            }
-//
-//
-//            List<Wall> LoW3 = new ArrayList<>(4);
-//            LoW3.add(new Wall(1.0, 1.0, Math.PI / 4, Math.sqrt(2)));
-//            LoW3.add(new Wall(2.0, 2.0, Math.PI * 7 / 4, Math.sqrt(2)));
-//            LoW3.add(new Wall(3.0, 1.0, Math.PI * 5 / 4, Math.sqrt(2)));
-//            LoW3.add(new Wall(2.0, 0.0, Math.PI * 3 / 4, Math.sqrt(2)));
-//            for (Wall w : LoW3) {
-//                w.color2 = Color.rgb((int)(Math.random() * 255),
-//                        (int)(Math.random() * 255),
-//                        (int)(Math.random() * 255));
-//            }
-//
-//            Wall exith = new Wall(15, 0, Math.PI / 4, 3 * Math.sqrt(2));
-//            Level hmap = new Level(LoW1, -1, -1, 0, 16, 1, 2, "Square");
-//            System.out.println(LoW1);
-//            LoL.add(hmap);
-//
-//
-//
-//
-//
-//            URL urlg = getClass().getResource("gmap.txt");
-//            List<Wall> LoW2 = wb.wallsFromFile(urlg.getPath());
-//            Wall exitg = new Wall(11, 5, 0, 1);
-//            for (Wall w : LoW2) {
-//                w.color2 = Color.rgb((int)(Math.random() * 255),
-//                        (int)(Math.random() * 255),
-//                        (int)(Math.random() * 255));
-//            }
-//            Level gmap = new Level(LoW2, 13, 8, Math.PI / 2, 11, 5, 2, "G");
-//            LoL.add(gmap);
-            url = getClass().getResource("hmap.txt");
+
+
+//LEVEL 1 - EASY SQUARE
+            url = getClass().getResource("AJLevel1.txt");
             LoW = wb.wallsFromFile(url.getPath());
-            
-            Level hmap = new Level(LoW, 31, 22, 0, 16, 1, 2, "Hell");
-            hmap.scale(.5);
-            System.out.println(LoW);
-            LoL.add(hmap);
 
-            for (Wall w : LoW) {
-                w.color1 = Color.rgb(
-                        (int) (Math.random() * 255),
-                        (int) (Math.random() * 255),
-                        (int) (Math.random() * 255));
-            }
+            level = new Level(LoW, 1, 1, 0, 6, 5, 1.3, "Easy Square");
+            level.randomizeWallColor1();
+            level.setWallDensity(3);
 
-            url = getClass().getResource("gmap.txt");
-            List<Wall> LoW2 = wb.wallsFromFile(url.getPath());
-            LoL.add(new Level(LoW2, 13, 8, Math.PI / 2, 11, 5, 2, "G"));
+            exitWall = new Wall(5, 5, -Math.PI / 4, 8);
+            exitWall.color1 = Color.GREEN;
+            exitWall.color2 = Color.GREEN;
+            LoW.add(exitWall);
+            LoL.add(level);
 
 
-            // Level 3
+//LEVEL 2 - TINY L
+
 
             Wall wall0 = new Wall(0, 0, Math.PI / 2, 60);
             wall0.color2 = Color.BLUE;
@@ -218,11 +188,31 @@ public class MenuView extends Application {
             LoW.add(wall4);
             LoW.add(wall5);
             LoW.add(exit);
-            Level levelL = new Level(LoW, 2, 4, 0,
-                    50, 40, 10, "The L");
-            LoL.add(levelL.scale(0.7));
+            level = new Level(LoW, 2, 4, 0,
+                    50, 40, 10, "Tiny L");
+            level.scale(0.4);
+            level.setWallDensity(1.8);
+            LoL.add(level);
 
-            //level 4
+
+
+//LEVEL 3 - G
+            url = getClass().getResource("gmap.txt");
+            LoW = wb.wallsFromFile(url.getPath());
+            level = new Level(LoW, 14, 1, Math.PI, 10.5, 3.5, 1.3, "G");
+//            level.randomizeWallColor1();
+            level.setWallDensity(3.6);
+            for (Wall w : LoW)
+                w.color1 = Color.PALEVIOLETRED;
+            exitWall = new Wall(11, 3, -5 * Math.PI / 4, 2);
+            exitWall.color1 = Color.GREEN;
+            exitWall.color2 = Color.GREEN;
+            LoW.add(exitWall);
+            LoL.add(level);
+
+
+
+//LEVEL 4 - THE I
             Wall wallI0 = new Wall(0, 0, Math.PI / 2, 40);
             wallI0.color2 = Color.BLUE;
             Wall wallI1 = new Wall(0, 40, 0, 25);
@@ -243,11 +233,11 @@ public class MenuView extends Application {
             wallI8.color2 = Color.ROYALBLUE;
             Wall wallI9 = new Wall(40, 40, 0, 25);
             wallI9.color2 = Color.DARKVIOLET;
-            Wall wallI10 = new Wall(40,0, 0, 25);
+            Wall wallI10 = new Wall(40, 0, 0, 25);
             wallI10.color2 = Color.LIGHTGRAY;
             Wall wallI11 = new Wall(65, 0, Math.PI / 2, 40);
             wallI11.color2 = Color.GOLDENROD;
-            Wall wallIExit = new Wall(40, 35, Math.PI / 4, 5*Math.sqrt(2));
+            Wall wallIExit = new Wall(40, 35, Math.PI / 4, 5 * Math.sqrt(2));
             wallIExit.color1 = Color.GREEN;
             wallIExit.color2 = Color.GREEN;
             LoW = new ArrayList<>();
@@ -267,6 +257,19 @@ public class MenuView extends Application {
             LoL.add(new Level(LoW, 2, 4, Math.PI,
                     40, 40, 10, "The I"));
 
+
+
+        Level hmap = new Level(LoW, 31, 22, 0, 16, 1, 2, "Hell");
+        hmap.scale(.5);
+        System.out.println(LoW);
+        LoL.add(hmap);
+
+        for (Wall w : LoW) {
+          w.color1 = Color.rgb(
+                  (int) (Math.random() * 255),
+                  (int) (Math.random() * 255),
+                  (int) (Math.random() * 255));
+        }
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
