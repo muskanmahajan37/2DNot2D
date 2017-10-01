@@ -1,4 +1,5 @@
 import java.awt.geom.Point2D;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.*;
@@ -199,10 +200,14 @@ public class WallBuilder {
 
 
 
-  public List<Wall> wallsFromFile(String targetFileName) throws FileNotFoundException {
+  public List<Wall> wallsFromFile(URL targetFileName) {
 
-    Scanner scan = new Scanner(new File(targetFileName));
-
+    Scanner scan = new Scanner(System.in);
+    try {
+      scan = new Scanner(targetFileName.openStream());
+    } catch (Exception e) {
+      System.out.println("ERROR");
+    }
     List<Wall> result = new ArrayList<>();
 
     List<List<Boolean>> askiiInBools = new ArrayList<List<Boolean>>();
