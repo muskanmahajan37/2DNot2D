@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.Baddie;
 import model.Level;
@@ -118,22 +119,66 @@ public class MenuView extends Application {
     public List<Level> initLevels() {
         WallBuilder wb = new WallBuilder();
 
-        List<Level> LoL = new ArrayList<Level>();
-
+        List<Level> LoL = new ArrayList<>();
+        List<Wall> LoW = new ArrayList<>();
+        Level level;
+        URL url;
+        
         try {
-            URL urlh = getClass().getResource("hmap.txt");
-            System.out.println(urlh.getPath());
-            List<Wall> LoW1 = wb.wallsFromFile(urlh.getPath());
-            Wall exith = new Wall(15, 0, Math.PI / 4, 3 * Math.sqrt(2));
-            Level hmap = new Level(LoW1, 1, 7, 0, 16, 1, 2, "H");
-            System.out.println(LoW1);
+            url = getClass().getResource("hmap.txt");
+            LoW = wb.wallsFromFile(url.getPath());
+            
+            Level hmap = new Level(LoW, 1, 7, 0, 16, 1, 2, "H");
+            System.out.println(LoW);
             LoL.add(hmap);
 
-            URL urlg = getClass().getResource("gmap.txt");
-            List<Wall> LoW2 = wb.wallsFromFile(urlg.getPath());
-            Wall exitg = new Wall(11, 5, 0, 1);
-            Level gmap = new Level(LoW2, 13, 8, Math.PI / 2, 11, 5, 2, "G");
-            LoL.add(gmap);
+            for (Wall w : LoW) {
+                w.color1 = Color.rgb(
+                        (int) (Math.random() * 255),
+                        (int) (Math.random() * 255),
+                        (int) (Math.random() * 255));
+            }
+
+            url = getClass().getResource("gmap.txt");
+            List<Wall> LoW2 = wb.wallsFromFile(url.getPath());
+            LoL.add(new Level(LoW2, 13, 8, Math.PI / 2, 11, 5, 2, "G"));
+
+
+            // Level 3
+
+            Wall wall0 = new Wall(0, 0, Math.PI / 2, 60);
+            wall0.color2 = Color.BLUE;
+
+            Wall wall1 = new Wall(0, 60, 0, 50);
+            wall1.color2 = Color.DEEPPINK;
+
+            Wall wall2 = new Wall(50, 60, 3 * Math.PI / 2, 20);
+            wall2.color2 = Color.GREEN;
+
+            Wall wall3 = new Wall(20, 40, 0, 30);
+            wall3.color2 = Color.YELLOW;
+
+            Wall wall4 = new Wall(20, 0, Math.PI / 2, 40);
+            wall4.color2 = Color.DARKGREY;
+
+            Wall wall5 = new Wall(0, 0, 0, 20);
+            wall5.color2 = Color.PURPLE;
+
+            Wall exit = new Wall(45, 40, 1, 5 * Math.sqrt(2));
+            exit.color1 = Color.DEEPSKYBLUE;
+            exit.color2 = Color.DEEPSKYBLUE;
+
+            LoW = new ArrayList<>();
+            LoW.add(wall0);
+            LoW.add(wall1);
+            LoW.add(wall2);
+            LoW.add(wall3);
+            LoW.add(wall4);
+            LoW.add(wall5);
+            LoW.add(exit);
+            LoL.add(new Level(LoW, 2, 4, 0,
+                    50, 40, 10, "The L"));
+
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
