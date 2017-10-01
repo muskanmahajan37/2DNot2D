@@ -69,9 +69,4 @@ public class Level {
         walls.add(toAdd.wallHoriz);
     }
 
-    public void updateBaddies() {
-        for (Baddie b : baddies) {
-            b.updateBaddie();
-        }
-    }
 }

@@ -22,7 +22,6 @@ public class GameView {
     private Stage primaryStage;
     private boolean ignoreMouseEvent = false;
     private Runnable onQuitFunc = null;
-    private boolean redrawScreen;
 
     GameView(Stage primaryStage) {
         this.primaryStage = primaryStage;
@@ -34,7 +33,6 @@ public class GameView {
 
         this.level = level;
         this.player = new Player(level.playerstartx, level.playerstarty, level.playerstarttheta);
-        redrawScreen = true;
         AnimationTimer loop = new AnimationTimer() {
             private long before = System.currentTimeMillis();
             private float deltaTime;
@@ -43,26 +41,18 @@ public class GameView {
             public void handle(long l) {
                 deltaTime = (System.currentTimeMillis() - before) / 1000F;
 
-                double beforeX = player.x;
-                double beforeY = player.y;
-                double beforeTheta = player.theta;
-
                 if (!win) {
                     player.update(deltaTime);
-                    level.updateBaddies();
-
+                    for (Baddie b : level.baddies) {
+                        b.updateBaddie(deltaTime);
+                    }
                 }
-
 
                 if (Math.abs(player.x - level.exitX) + Math.abs(player.y - level.exitY) < level.exitRadius) {
                     win = true;
                 }
 
-                if (redrawScreen ||
-                        beforeX != player.x || beforeY != player.y || beforeTheta != player.theta) {
-                    draw();
-                    redrawScreen = false;
-                }
+                draw();
 
                 before = before + (long) (deltaTime * 1000);
             }
@@ -110,7 +100,6 @@ public class GameView {
                     break;
                 case R:
                     player = new Player(level.playerstartx, level.playerstarty, level.playerstarttheta);
-                    redrawScreen = true;
                     break;
             }
         });
@@ -168,7 +157,6 @@ public class GameView {
             if (viewDist <= 0.1) {
                 deaths += 1;
                 player = new Player(level.playerstartx, level.playerstarty, level.playerstarttheta);
-                redrawScreen = true;
             }
 
 

@@ -51,7 +51,8 @@ public class MenuView extends Application {
         GameView game = new GameView(primaryStage);
 
         List<Button> buttons = new ArrayList<>();
-        List<Level> levels = initLevels(); // initLevels();
+//        List<Level> levels = levels();
+        List<Level> levels = initLevels();
 
         int levelNum = 0;
         for (Level l : levels) {
@@ -97,9 +98,12 @@ public class MenuView extends Application {
 
         List<Level> levels = new ArrayList<>();
 
-        List<Wall> walls = new ArrayList<Wall>();
-        walls.add(new Wall(10, 0, Math.PI / 3, 100));
-        Level l = new Level(walls, 0, 0, 0, 10, 0, 1, "testmap");
+        List<Wall> walls = new ArrayList<>();
+        walls.add(new Wall(10, 0, Math.PI / 2, 100));
+        walls.get(0).color1 = Color.MAROON;
+        walls.add(new Wall(0, 0, Math.PI / 2, 100));
+        walls.get(1).color1 = Color.AQUAMARINE;
+        Level l = new Level(walls, 0, -1, 0, 10, 0, 1, "testmap");
 
         levels.add(l);
 
@@ -132,7 +136,7 @@ public class MenuView extends Application {
         // use level.scale(factor) to scale completely scale a level
 
         // use level.randomizeWallColor1() to randomize the color of each wall's stripe 1
-        
+
         try {
 //            URL urlh = getClass().getResource("hmap.txt");
 //            System.out.println(urlh.getPath());
@@ -180,6 +184,7 @@ public class MenuView extends Application {
 
             level = new Level(LoW, 1, 4, 0, 5, 6, 2, "Easy Square");
             level.randomizeWallColor1();
+            level.setWallDensity(3);
 
             exitWall = new Wall(4, 5, -Math.PI / 4, 8);
             exitWall.color1 = Color.GREEN;
@@ -249,11 +254,11 @@ public class MenuView extends Application {
             wallI8.color2 = Color.ROYALBLUE;
             Wall wallI9 = new Wall(40, 40, 0, 25);
             wallI9.color2 = Color.DARKVIOLET;
-            Wall wallI10 = new Wall(40,0, 0, 25);
+            Wall wallI10 = new Wall(40, 0, 0, 25);
             wallI10.color2 = Color.LIGHTGRAY;
             Wall wallI11 = new Wall(65, 0, Math.PI / 2, 40);
             wallI11.color2 = Color.GOLDENROD;
-            Wall wallIExit = new Wall(40, 35, Math.PI / 4, 5*Math.sqrt(2));
+            Wall wallIExit = new Wall(40, 35, Math.PI / 4, 5 * Math.sqrt(2));
             wallIExit.color1 = Color.GREEN;
             wallIExit.color2 = Color.GREEN;
             LoW = new ArrayList<>();
