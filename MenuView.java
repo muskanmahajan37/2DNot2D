@@ -259,21 +259,23 @@ public class MenuView extends Application {
 
 
 
-        Level hmap = new Level(LoW, 31, 22, 0, 16, 1, 2, "Hell");
-        hmap.scale(.5);
-        System.out.println(LoW);
-        LoL.add(hmap);
+          LoW = wb.wallsFromFile("Hell.txt");
+          Level hmap = new Level(LoW, 31, 22, 0, 16, 1, 2, "Hell");
+          hmap.scale(.5);
+          hmap.setWallDensity(4);
+          System.out.println(LoW);
+          LoL.add(hmap);
 
-        for (Wall w : LoW) {
-          w.color1 = Color.rgb(
-                  (int) (Math.random() * 255),
-                  (int) (Math.random() * 255),
-                  (int) (Math.random() * 255));
-        }
+          for (Wall w : LoW) {
+            w.color1 = Color.rgb(
+                    (int) (Math.random() * 255),
+                    (int) (Math.random() * 255),
+                    (int) (Math.random() * 255));
+          }
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+          } catch (FileNotFoundException e) {
+              e.printStackTrace();
+          }
 
         return LoL;
     }
