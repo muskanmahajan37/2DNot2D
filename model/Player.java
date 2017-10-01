@@ -60,7 +60,6 @@ public class Player {
             this.y += 3 * deltaTime * Math.sin(theta + Math.PI / 2);
         }
 
-        System.out.println(this.toString());
     }
 
     public String toString() {
