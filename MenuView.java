@@ -153,7 +153,7 @@ public class MenuView extends Application {
             wall1.color2 = Color.DEEPPINK;
 
             Wall wall2 = new Wall(50, 60, 3 * Math.PI / 2, 20);
-            wall2.color2 = Color.GREEN;
+            wall2.color2 = Color.BROWN;
 
             Wall wall3 = new Wall(20, 40, 0, 30);
             wall3.color2 = Color.YELLOW;
@@ -165,8 +165,8 @@ public class MenuView extends Application {
             wall5.color2 = Color.PURPLE;
 
             Wall exit = new Wall(45, 40, 1, 5 * Math.sqrt(2));
-            exit.color1 = Color.DEEPSKYBLUE;
-            exit.color2 = Color.DEEPSKYBLUE;
+            exit.color1 = Color.GREEN;
+            exit.color2 = Color.GREEN;
 
             LoW = new ArrayList<>();
             LoW.add(wall0);
@@ -178,6 +178,51 @@ public class MenuView extends Application {
             LoW.add(exit);
             LoL.add(new Level(LoW, 2, 4, 0,
                     50, 40, 10, "The L"));
+
+            //level 4
+            Wall wallI0 = new Wall(0, 0, Math.PI / 2, 40);
+            wallI0.color2 = Color.BLUE;
+            Wall wallI1 = new Wall(0, 40, 0, 25);
+            wallI1.color2 = Color.DEEPPINK;
+            Wall wallI2 = new Wall(25, 25, Math.PI / 2, 15);
+            wallI2.color2 = Color.YELLOW;
+            Wall wallI3 = new Wall(25, 0, Math.PI / 2, 15);
+            wallI3.color2 = Color.NAVY;
+            Wall wallI4 = new Wall(0, 0, 0, 25);
+            wallI4.color2 = Color.FUCHSIA;
+            Wall wallI5 = new Wall(25, 15, 0, 15);
+            wallI5.color2 = Color.LIME;
+            Wall wallI6 = new Wall(25, 25, 0, 15);
+            wallI6.color2 = Color.MAROON;
+            Wall wallI7 = new Wall(40, 25, Math.PI / 2, 15);
+            wallI7.color2 = Color.ORCHID;
+            Wall wallI8 = new Wall(40, 0, Math.PI / 2, 15);
+            wallI8.color2 = Color.ROYALBLUE;
+            Wall wallI9 = new Wall(40, 40, 0, 25);
+            wallI9.color2 = Color.DARKVIOLET;
+            Wall wallI10 = new Wall(40,0, 0, 25);
+            wallI10.color2 = Color.LIGHTGRAY;
+            Wall wallI11 = new Wall(65, 0, Math.PI / 2, 40);
+            wallI11.color2 = Color.GOLDENROD;
+            Wall wallIExit = new Wall(40, 35, Math.PI / 4, 5*Math.sqrt(2));
+            wallIExit.color1 = Color.GREEN;
+            wallIExit.color2 = Color.GREEN;
+            LoW = new ArrayList<>();
+            LoW.add(wallI0);
+            LoW.add(wallI1);
+            LoW.add(wallI2);
+            LoW.add(wallI3);
+            LoW.add(wallI4);
+            LoW.add(wallI5);
+            LoW.add(wallI6);
+            LoW.add(wallI7);
+            LoW.add(wallI8);
+            LoW.add(wallI9);
+            LoW.add(wallI10);
+            LoW.add(wallI11);
+            LoW.add(wallIExit);
+            LoL.add(new Level(LoW, 2, 4, Math.PI,
+                    40, 40, 10, "The I"));
 
 
         } catch (FileNotFoundException e) {
