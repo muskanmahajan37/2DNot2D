@@ -53,7 +53,7 @@ public class MenuView extends Application {
         List<Button> buttons = new ArrayList<>();
         List<Level> levels = initLevels(); // initLevels();
 
-        int levelNum = 1;
+        int levelNum = 0;
         for (Level l : levels) {
             Button btn = new Button();
             levelNum++;
