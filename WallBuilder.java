@@ -54,7 +54,7 @@ public class WallBuilder {
             // If we are working on a wall
             // End and add it
             double dist = Math.abs(startPoint.y - rowNumber);
-            result.add(new Wall(startPoint.x, startPoint.y, Math.PI * 3 / 2, dist - 1));
+            result.add(new Wall(startPoint.x, startPoint.y, Math.PI * 1 / 2, dist - 1));
             workingOnWall = false;
           } else {
             // If we are NOT working on a wall
@@ -101,7 +101,7 @@ public class WallBuilder {
             // If we are working on a wall
             // finish it!
             double dist = Math.abs(startPoint.y - rowNumber);
-            result.add(new Wall(startPoint.x, startPoint.y, Math.PI * 3 / 2, dist - 1));
+            result.add(new Wall(startPoint.x, startPoint.y, Math.PI * 1 / 2, dist - 1));
             workingOnWall = false;
           } else {
             // If we are not working on a wall
@@ -113,7 +113,7 @@ public class WallBuilder {
       if (workingOnWall) {
         // end the wall
         double dist = Math.abs(startPoint.y - askiiInBools.size());
-        result.add(new Wall(startPoint.x, startPoint.y, Math.PI * 3 / 2, dist - 1));
+        result.add(new Wall(startPoint.x, startPoint.y, Math.PI * 1 / 2, dist - 1));
         workingOnWall = false;
       }
     } // End row

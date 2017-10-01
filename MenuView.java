@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.Baddie;
 import model.Level;
@@ -52,7 +53,7 @@ public class MenuView extends Application {
         List<Button> buttons = new ArrayList<>();
         List<Level> levels = initLevels(); // initLevels();
 
-        int levelNum = 0;
+        int levelNum = 1;
         for (Level l : levels) {
             Button btn = new Button();
             levelNum++;
@@ -124,14 +125,42 @@ public class MenuView extends Application {
             URL urlh = getClass().getResource("hmap.txt");
             System.out.println(urlh.getPath());
             List<Wall> LoW1 = wb.wallsFromFile(urlh.getPath());
+
+            for (Wall w : LoW1) {
+                w.color1 = Color.rgb((int)(Math.random() * 255),
+                                     (int)(Math.random() * 255),
+                                     (int)(Math.random() * 255));
+            }
+
+
+            List<Wall> LoW3 = new ArrayList<>(4);
+            LoW3.add(new Wall(1.0, 1.0, Math.PI / 4, Math.sqrt(2)));
+            LoW3.add(new Wall(2.0, 2.0, Math.PI * 7 / 4, Math.sqrt(2)));
+            LoW3.add(new Wall(3.0, 1.0, Math.PI * 5 / 4, Math.sqrt(2)));
+            LoW3.add(new Wall(2.0, 0.0, Math.PI * 3 / 4, Math.sqrt(2)));
+            for (Wall w : LoW3) {
+                w.color2 = Color.rgb((int)(Math.random() * 255),
+                        (int)(Math.random() * 255),
+                        (int)(Math.random() * 255));
+            }
+
             Wall exith = new Wall(15, 0, Math.PI / 4, 3 * Math.sqrt(2));
-            Level hmap = new Level(LoW1, 1, 7, 0, 16, 1, 2, "H");
+            Level hmap = new Level(LoW1, -1, -1, 0, 16, 1, 2, "Square");
             System.out.println(LoW1);
             LoL.add(hmap);
+
+
+
+
 
             URL urlg = getClass().getResource("gmap.txt");
             List<Wall> LoW2 = wb.wallsFromFile(urlg.getPath());
             Wall exitg = new Wall(11, 5, 0, 1);
+            for (Wall w : LoW2) {
+                w.color2 = Color.rgb((int)(Math.random() * 255),
+                        (int)(Math.random() * 255),
+                        (int)(Math.random() * 255));
+            }
             Level gmap = new Level(LoW2, 13, 8, Math.PI / 2, 11, 5, 2, "G");
             LoL.add(gmap);
 

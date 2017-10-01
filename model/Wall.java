@@ -42,8 +42,9 @@ public class Wall {
         this(aWall.x, aWall.y, aWall.theta, aWall.length);
     }
 
+    int width = 1;
     public Color getColorAtDist(double dist) {
-        if (((int) dist * 7) % 2 == 0) {
+        if ((dist * 7) % (2 * width) < width) {
             return color1;
         } else {
             return color2;

@@ -59,6 +59,18 @@ public class Player {
             this.x += 3 * deltaTime * Math.cos(theta + Math.PI / 2);
             this.y += 3 * deltaTime * Math.sin(theta + Math.PI / 2);
         }
+
+        System.out.println(this.toString());
+    }
+
+    public String toString() {
+        String result = "";
+        result += "[Player: ";
+        result += "Theta: " + this.theta + "  ";
+        result += "x: " + this.x + "  ";
+        result += "Y: " + this.y + "  ";
+        result += "]";
+        return result;
     }
 
     public void updateTheta(double newTheta) {
