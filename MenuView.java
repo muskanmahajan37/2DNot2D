@@ -169,7 +169,8 @@ public class MenuView extends Application {
             url = getClass().getResource("hmap.txt");
             LoW = wb.wallsFromFile(url.getPath());
             
-            Level hmap = new Level(LoW, 1, 5, 0, 16, 1, 2, "H");
+            Level hmap = new Level(LoW, 31, 22, 0, 16, 1, 2, "Hell");
+            hmap.scale(.5);
             System.out.println(LoW);
             LoL.add(hmap);
 
