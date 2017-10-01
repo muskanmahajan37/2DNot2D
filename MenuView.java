@@ -301,11 +301,62 @@ public class MenuView extends Application {
           LoL.add(level);
 
 
+          //Level 8 Baddie boys
+          url = getClass().getResource("BaddieBoyz");
+          LoW = wb.wallsFromFile(url.getPath());
+          level = new Level(LoW, 1, 1, 0, 24, 6, 2.5, "Baddie Intro");
+          level.setWallDensity(2);
+//          for (Wall w : LoW)
+//            w.color1 = Color.PALEVIOLETRED;
+          level.randomizeWallColor1();
+          exitWall = new Wall(24, 6, -1 * Math.PI / 4, 2);
+          exitWall.color1 = Color.GREEN;
+          exitWall.color2 = Color.GREEN;
+
+          // Make baddies
+          Baddie baddie = new Baddie(3, 1.5, 1);
+          List<Point2D> baddiePoints = new ArrayList<>(3);
+          baddiePoints.add(new Point2D.Double(6, 2));
+          baddiePoints.add(new Point2D.Double(3, 5.5));
+          baddiePoints.add(new Point2D.Double(3, 1.5));
+          baddie.setPatrol(baddiePoints, 3);
+          level.addBaddie(baddie);
+          //
+          baddie = new Baddie(9, 1.5, 1);
+          baddiePoints = new ArrayList<>(3);
+          baddiePoints.add(new Point2D.Double(9, 4));
+          baddiePoints.add(new Point2D.Double(12, 5.5));
+          baddiePoints.add(new Point2D.Double(9, 1.5));
+          baddie.setPatrol(baddiePoints, 3);
+          level.addBaddie(baddie);
+          //
+          baddie = new Baddie(14, 0.5, 1);
+          baddiePoints = new ArrayList<>(6);
+          baddiePoints.add(new Point2D.Double(16, 3));
+          baddiePoints.add(new Point2D.Double(14, 5.5));
+          baddiePoints.add(new Point2D.Double(16, 3));
+          baddiePoints.add(new Point2D.Double(14, 0.5));
+          baddiePoints.add(new Point2D.Double(16, 3));
+          baddiePoints.add(new Point2D.Double(14, 0.5));
+          baddie.setPatrol(baddiePoints, 3);
+          level.addBaddie(baddie);
+          //
+          baddie = new Baddie(2, 3, 2);
+          baddiePoints = new ArrayList<>(2);
+          baddiePoints.add(new Point2D.Double(23, 3));
+          baddiePoints.add(new Point2D.Double(2, 3));
+          baddie.setPatrol(baddiePoints, 7);
+          level.addBaddie(baddie);
+
+
+          LoW.add(exitWall);
+          LoL.add(level);
+
 
 // Level 666 Hell
           LoW = wb.wallsFromFile("Hell.txt");
-          Level hmap = new Level(LoW, 31, 22, 0, 16, 1, 2, "Hell");
-          hmap.scale(.5);
+          Level hmap = new Level(LoW, 31, 27, 0, 16, 1, 2, "Hell");
+          hmap.scale(1);
           hmap.setWallDensity(4);
           System.out.println(LoW);
           LoL.add(hmap);

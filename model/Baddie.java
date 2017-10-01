@@ -96,20 +96,20 @@ public class Baddie {
 
         if (traveled >= distToTravel) {
             // change move direction (unitVector)
-            System.out.println("this= "+ this);
+            //System.out.println("this= "+ this);
             currentPatrolPosition = nextPatrolIndex();
-            System.out.println("Want to travel to x=" + patrolPositions.get(currentPatrolPosition).getX() + ", y=" +
-                    patrolPositions.get(currentPatrolPosition).getY());
+            //System.out.println("Want to travel to x=" + patrolPositions.get(currentPatrolPosition).getX() + ", y=" +
+            //        patrolPositions.get(currentPatrolPosition).getY());
 
             double deltaX = patrolPositions.get(currentPatrolPosition).getX() - positionX ;
             double deltaY = patrolPositions.get(currentPatrolPosition).getY() - positionY;
 
             this.distToTravel = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
             this.traveled = 0;
-            System.out.println("DIST TO TRAVEL = " + distToTravel);
+            //System.out.println("DIST TO TRAVEL = " + distToTravel);
             // Vector of length 1 pointing towards the patrol point to move to.
             this.unitVector = new Point2D.Double(deltaX / distToTravel, deltaY / distToTravel);
-            System.out.println("Travel by x=" + unitVector.getX() + ", y=" + unitVector.getY());
+            //System.out.println("Travel by x=" + unitVector.getX() + ", y=" + unitVector.getY());
 
         } else {
             this.positionX += deltaTime * speed * unitVector.getX();
@@ -117,8 +117,8 @@ public class Baddie {
             moveWallsToBaddiePos();
 
 //            System.out.println("T=" + traveled);
-            if (Math.random() > 0.99)
-                System.out.println("x="+this.positionX +"\nt="+traveled+"\n\n");
+            //if (Math.random() > 0.99)
+                //System.out.println("x="+this.positionX +"\nt="+traveled+"\n\n");
             traveled += speed * deltaTime;
         }
     }

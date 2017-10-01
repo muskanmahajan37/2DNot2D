@@ -44,8 +44,8 @@ public class GameView {
 
                 if (!win) {
                     player.update(deltaTime);
-//                    if (Math.random() > 0.86)
-//                        System.out.println(player);
+                    if (Math.random() > 0.76)
+                        System.out.println(player);
                     for (Baddie b : level.baddies) {
                         b.updateBaddie(deltaTime);
                     }
