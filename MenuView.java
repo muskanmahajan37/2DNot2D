@@ -354,7 +354,8 @@ public class MenuView extends Application {
 
 
 // Level 666 Hell
-          LoW = wb.wallsFromFile("Hell.txt");
+          url = getClass().getResource("Hell.txt");
+          LoW = wb.wallsFromFile(url.getPath());
           Level hmap = new Level(LoW, 31, 27, 0, 16, 1, 2, "Hell");
           hmap.scale(1);
           hmap.setWallDensity(4);
