@@ -258,7 +258,51 @@ public class MenuView extends Application {
                     40, 40, 10, "The I"));
 
 
+          // Level 5
+          url = getClass().getResource("AJLevel2.txt");
+          LoW = wb.wallsFromFile(url.getPath());
+          level = new Level(LoW, 1, 1, 0, 1, 9, 1, "Baby Hell");
+          level.setWallDensity(3.6);
+//          for (Wall w : LoW)
+//            w.color1 = Color.PALEVIOLETRED;
+          level.randomizeWallColor1();
+          exitWall = new Wall(1, 9, 0, 1);
+          exitWall.color1 = Color.GREEN;
+          exitWall.color2 = Color.GREEN;
+          LoW.add(exitWall);
+          LoL.add(level);
 
+          // Level 6
+          url = getClass().getResource("AJLevel3.txt");
+          LoW = wb.wallsFromFile(url.getPath());
+          level = new Level(LoW, 1, 1, 0, 14, 13, .8, "Queue");
+          level.randomizeWallColor1();
+          level.setWallDensity(3.6);
+          for (Wall w : LoW)
+            w.color1 = Color.PALEVIOLETRED;
+          exitWall = new Wall(14, 13, 0, 1);
+          exitWall.color1 = Color.GREEN;
+          exitWall.color2 = Color.GREEN;
+          LoW.add(exitWall);
+          LoL.add(level);
+
+          // Level 7
+          url = getClass().getResource("AJLevel4.txt");
+          LoW = wb.wallsFromFile(url.getPath());
+          level = new Level(LoW, 1, 1, 0, 0, 7.5, 1, "Blades");
+          level.setWallDensity(3.6);
+//          for (Wall w : LoW)
+//            w.color1 = Color.PALEVIOLETRED;
+          level.randomizeWallColor1();
+          exitWall = new Wall(0, 7.5, -1 * Math.PI / 4, 2);
+          exitWall.color1 = Color.GREEN;
+          exitWall.color2 = Color.GREEN;
+          LoW.add(exitWall);
+          LoL.add(level);
+
+
+
+// Level 666 Hell
           LoW = wb.wallsFromFile("Hell.txt");
           Level hmap = new Level(LoW, 31, 22, 0, 16, 1, 2, "Hell");
           hmap.scale(.5);
