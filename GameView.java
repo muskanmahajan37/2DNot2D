@@ -28,7 +28,8 @@ public class GameView {
     }
 
     public void createCanvas(Level level) {
-        win = false;
+        this.win = false;
+        this.deaths = 0;
         this.level = level;
 
         this.level = level;
