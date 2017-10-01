@@ -218,8 +218,8 @@ public class MenuView extends Application {
             LoW.add(wall5);
             LoW.add(exit);
             Level levelL = new Level(LoW, 2, 4, 0,
-                    50, 40, 10, "The L");
-            LoL.add(levelL.scale(0.7));
+                    50, 40, 10, "Tiny L");
+            LoL.add(levelL.scale(0.2));
 
             //level 4
             Wall wallI0 = new Wall(0, 0, Math.PI / 2, 40);
