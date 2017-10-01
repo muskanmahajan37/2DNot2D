@@ -44,7 +44,7 @@ public class Wall {
 
     int width = 1;
     public Color getColorAtDist(double dist) {
-        if ((dist * 7) % (2 * width) < width) {
+        if ((dist) % (2 * width) < width) {
             return color1;
         } else {
             return color2;
